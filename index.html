@@ -155,6 +155,237 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2016/01/03/2015-01-13-mapreduce-design-patterns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/01/03/2015-01-13-mapreduce-design-patterns/" class="post-title-link" itemprop="url">MapReduce Design Patterns</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-03 13:01:55" itemprop="dateCreated datePublished" datetime="2016-01-03T13:01:55+08:00">2016-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:15:23" itemprop="dateModified" datetime="2020-08-13T16:15:23+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>推荐一个<strong>免费</strong>在线课程<a href="www.udacity.com">Intro to Hadoop and MapReduce</a><br>学完就算入门了，一个周末的时间就够。虽然大家都是直接hive或者pig，不手写mapreduce，不过了解一下思想还是不错的。</p>
+<p>貌似现在hadoop也过时了，新趋势是spark？</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Filtering Patterns</th>
+<th>Summarization Patterns</th>
+<th>structural Patterns</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sampling</td>
+<td>Countin  g</td>
+<td>Combining Data sets</td>
+</tr>
+<tr>
+<td>Top-N</td>
+<td>Mean</td>
+<td>XXXXXXX</td>
+</tr>
+</tbody></table>
+<hr>
+<p>###Sampling</p>
+<ul>
+<li>在mapper中根据条件取需要的字段输出</li>
+</ul>
+<p>###Top-10</p>
+<ul>
+<li>每个Mapper生成自己的top-N列表,最菜可以搞个排序，高级点用heap</li>
+<li>Reducer找到全局的top-N</li>
+</ul>
+<p>###Counting</p>
+<ul>
+<li>经典的word count，例子一堆</li>
+</ul>
+<p>###Mean </p>
+<ul>
+<li>Mapper抽取需要的（key，value）</li>
+<li>Reducer按照key计算平均数</li>
+</ul>
+<p>###Combining Data sets</p>
+<ul>
+<li>Mapper读入原始数据提取join用的key，value是tag标记每行数据来源加上其他读入信息。</li>
+<li>Reducer根据tag合并数据</li>
+</ul>
+<p>###Advanced </p>
+<ul>
+<li>Read the book <strong>MapReduce Design Patterns</strong></li>
+</ul>
+<p>###MSIC</p>
+<ul>
+<li><p>单机测试命令，不然每次真跑慢死人~~</p>
+<pre><code>  cat file.txt | ./mapper.py |sort -k1 |./reducer.py</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>用-combiner参数可以在本地先做一部分reduce</p>
+</li>
+<li><p>Alis，放到 .bashrc 里少敲一点是一点</p>
+<pre><code>  run_mapreduce() &#123;
+      hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.1.1.jar -mapper $1 -reducer $2 -file $1 -file $2 -input $3 -output $4
+  &#125;
+
+  run_mapreduce_with_combiner()&#123;
+      hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.1.1.jar -mapper $1 -reducer $2 -combiner $2 -file $1 -file $2 -input $3 -output $4
+  &#125;
+
+  alias hs=run_mapreduce
+  alias hsc=run_mapreduce_with_combiner</code></pre>
+</li>
+<li><p>Map阶段和shuffle阶段是可以交替进行的，并不是要等所有的map结束才能进行下一个阶段。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/10/02/2015-01-07-python-__slots__/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/10/02/2015-01-07-python-__slots__/" class="post-title-link" itemprop="url">python __slots__ 用法介绍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-10-02 23:01:55" itemprop="dateCreated datePublished" datetime="2015-10-02T23:01:55+08:00">2015-10-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:15:23" itemprop="dateModified" datetime="2020-08-13T16:15:23+08:00">2020-08-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Python的__solts__方法估计很多人都不知道，个人感觉和metaclass一样属于黑魔法范畴，轻易不要用，除非你知道你在干啥，娱乐学习除外。</p>
+<p>###WTF is <strong>slots</strong></p>
+<p>当你在一个class中定义了__solts__后所有class的实例中只有slots中定义的attributes会出现在class的实例中。<br>例子：</p>
+<pre><code>class Foo:
+    __slots__ = [&#39;x&#39;]
+    def __init__(self, n):
+        self.x = n
+
+y = Foo(1)
+print y.x  # prints &quot;1&quot;
+y.x = 2
+print y.x  # prints &quot;2&quot;
+y.z = 4    # 抛出异常
+print y.z</code></pre>
+<p>###使用场景</p>
+<p>节省对象所占用的空间<br>python中的对象默认使用__dict__来存储自己的attributes，借助这个实现，你可以在任何时候动态修改对象的attributes。<br>如果使用了__slots__你可以在每个对象上节省这个dict的空间占用。因为所有对象使用的是同一个__slots__，不再维护自己的dict。<br>算一下你有几百万个对象，每个对象少占用一个dict的空间。。。</p>
+<p>实例<a target="_blank" rel="noopener" href="http://tech.oyster.com/pythons-garbage-collector/">AN ARM WRESTLE WITH PYTHON’S GARBAGE COLLECTOR</a><br>文章的作者通过用slots省了9 GB的内存。</p>
+<p>###不要滥用</p>
+<p>用了slots之后会破坏python的一些feature例如多继承就废了。</p>
+<p>###进阶推荐阅读<br><a target="_blank" rel="noopener" href="http://lucumr.pocoo.org/2014/8/16/the-python-i-would-like-to-see/">Armin Ronacher大牛拿slots开刀喷py3的文章</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/09/09/2015-02-10-auto-complete-your-cmd-by-using-click/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -808,6 +1039,87 @@ def my_view(request):
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/02/04/2015-02-04-a-question-about-people-who-using-python-in-zhihu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/02/04/2015-02-04-a-question-about-people-who-using-python-in-zhihu/" class="post-title-link" itemprop="url">A question about people who using python, from zhihu</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-02-04 20:13:34" itemprop="dateCreated datePublished" datetime="2015-02-04T20:13:34+08:00">2015-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:13:08" itemprop="dateModified" datetime="2020-08-13T16:13:08+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天凑巧在zhihu上看到一个问题： <strong>使用 Python 会降低程序员的编程能力吗？</strong></p>
+<p>用python也好久了，确实存在基本功下降的问题，非常赞同下面的答案。高中时我也是用pascal的<del>~</del></p>
+<p>———————————–答案———————————–</p>
+<p>十年前，Pascal。我会精确计算每个数组和变量使用的内存，熟练地用非递归方法改写程序，最短的时间内自己实现各种排序，多源最短路径，求凸包和相邻点，动态规划，二分图匹配和网络流算法等等等等，同时考虑算法的最坏复杂度和最高项前边的那个常数。现在，我一个都不记得了是的现在列举这些名词我就是在装逼。</p>
+<p>五年前，C。我会自认为炫酷的使用函数指针，强制类型转换，goto语句，宏来实现各种技巧（他喵的全是Linux kernel害的）。我挣扎在多线程，多进程和各种锁。我试着照ICC出来的汇编改程序。但你让我不看书写个红黑树出来我是做不到了。现在，你突然让我写个C程序我得想一下语法。（所以这里我还是在装逼。）</p>
+<p>现在，Python。写之前习惯性搜一下有没有现成的库。不会自己去实现图的数据结构了，因为有NetworkX。不会自己去处理网络通信了，用Redis搞个发布订阅机制或者干脆实现个ReST服务都没几行代码。多线程？Gevent搞异步多简单速度还比你快。</p>
+<p>我变笨了。</p>
+<p>但是。</p>
+<p>十年前我只能刷刷USACO和浙大同济的Online Judge。AC是最高目标。<br>五年前我只能写写自己用的小软件系统驱动什么的，或者通宵写个大作业。<br>现在我在研究用Evolutionary Optimisation在云平台上调度Scientific Workflow。</p>
+<p>会什么和干什么，你觉得哪个重要？</p>
+<p>======</p>
+<p>感谢 @徐酿泉的意见。</p>
+<p>我的意思并不是说因为用这些语言所以在干这些事儿，而是确确实实感觉到这些年自己的编程能力（或者说基本功，因为毕竟很多高级的技巧我也会的越来越多）在下降，而且我认为这和我用的语言越来越高级是有一定关系的。当然语言和做的事之间完全没什么必然关系。但是以前的水平高又怎么样呢？做出来的不过是没有人关心的玩具罢了。即使能力值降低了，不过既然现在在做也可以做更有意义的事了，谁还关心跑分呢。</p>
+<p>日，我发现语文能力也下降了。。。</p>
+<p>======<br>呃。。我又改用Clojure了。。。</p>
+<hr>
+<p><a target="_blank" rel="noopener" href="http://www.zhihu.com/question/19900260">原问题在zhihu上的地址</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/10/08/concurrency-is-not-parallelism/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -979,99 +1291,6 @@ def my_view(request):
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/09/09/2015-01-07-python-__slots__/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jie.Jia">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="J's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/09/09/2015-01-07-python-__slots__/" class="post-title-link" itemprop="url">python __slots__ 用法介绍</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-09-09 22:06:53" itemprop="dateCreated datePublished" datetime="2014-09-09T22:06:53+08:00">2014-09-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 16:10:48" itemprop="dateModified" datetime="2020-08-13T16:10:48+08:00">2020-08-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Python的__solts__方法估计很多人都不知道，个人感觉和metaclass一样属于黑魔法范畴，轻易不要用，除非你知道你在干啥，娱乐学习除外。</p>
-<p>###WTF is <strong>slots</strong></p>
-<p>当你在一个class中定义了__solts__后所有class的实例中只有slots中定义的attributes会出现在class的实例中。<br>例子：</p>
-<pre><code>class Foo:
-    __slots__ = [&#39;x&#39;]
-    def __init__(self, n):
-        self.x = n
-
-y = Foo(1)
-print y.x  # prints &quot;1&quot;
-y.x = 2
-print y.x  # prints &quot;2&quot;
-y.z = 4    # 抛出异常
-print y.z</code></pre>
-<p>###使用场景</p>
-<p>节省对象所占用的空间<br>python中的对象默认使用__dict__来存储自己的attributes，借助这个实现，你可以在任何时候动态修改对象的attributes。<br>如果使用了__slots__你可以在每个对象上节省这个dict的空间占用。因为所有对象使用的是同一个__slots__，不再维护自己的dict。<br>算一下你有几百万个对象，每个对象少占用一个dict的空间。。。</p>
-<p>实例<a target="_blank" rel="noopener" href="http://tech.oyster.com/pythons-garbage-collector/">AN ARM WRESTLE WITH PYTHON’S GARBAGE COLLECTOR</a><br>文章的作者通过用slots省了9 GB的内存。</p>
-<p>###不要滥用</p>
-<p>用了slots之后会破坏python的一些feature例如多继承就废了。</p>
-<p>###进阶推荐阅读<br><a target="_blank" rel="noopener" href="http://lucumr.pocoo.org/2014/8/16/the-python-i-would-like-to-see/">Armin Ronacher大牛拿slots开刀喷py3的文章</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/08/19/ChangeSRCforRuby/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1141,180 +1360,11 @@ $ gem install rails</code></pre>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/08/14/closures-in-python/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jie.Jia">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="J's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/08/14/closures-in-python/" class="post-title-link" itemprop="url">Python的闭包</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-08-14 22:06:53" itemprop="dateCreated datePublished" datetime="2014-08-14T22:06:53+08:00">2014-08-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 15:52:04" itemprop="dateModified" datetime="2020-08-13T15:52:04+08:00">2020-08-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/4020419/closures-in-python">SO上关于Python闭包问题的最佳答案</a></p>
-<p>A closure occurs when a function has access to a local variable from an enclosing scope that has finished its execution.</p>
-<pre><code>def make_printer(msg):
-    def printer():
-        print msg
-    return printer
-
-printer = make_printer(&#39;Foo!&#39;)
-printer()</code></pre>
-<p>When make_printer is called, a new frame is put on the stack with the compiled code for the printer function as a constant and the value of msg as a local. It then creates and returns the function. Because the function printer references the msg variable, it is kept alive after the make_printer function has returned.</p>
-<p>So, if your nested functions don’t</p>
-<p>access variables that are local to enclosing scopes,<br>do so when they are executed outside of that scope,<br>then they are not closures.</p>
-<p>Here’s an example of a nested function which is not a closure.</p>
-<pre><code>def make_printer(msg):
-    def printer(msg=msg):
-        print msg
-    return printer
-
-printer = make_printer(&quot;Foo!&quot;)
-printer()  #Output: Foo!</code></pre>
-<p>Here, we are binding the value to the default value of a parameter. This occurs when the function printer is created and so no reference to the value of msg external to printer needs to be maintained after make_printer returns. msg is just a normal local variable of the function printer in this context.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/07/15/tukumx-is-better-than-mongo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jie.Jia">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="J's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/07/15/tukumx-is-better-than-mongo/" class="post-title-link" itemprop="url">TukuMX is better than mongo?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-07-15 20:06:53" itemprop="dateCreated datePublished" datetime="2014-07-15T20:06:53+08:00">2014-07-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 15:52:04" itemprop="dateModified" datetime="2020-08-13T15:52:04+08:00">2020-08-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mongo/" itemprop="url" rel="index"><span itemprop="name">mongo</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>今天在网上看到一个TukuMX的开源项目，算是mongodb的一个分支项目。也是由一家商业公司开源出来，并同时提供商业版本，记录一些点备查。</p>
-<p>###亮点：</p>
-<ul>
-<li>压缩。MongoDB BSON格式的带来的存储空间消耗实在是太大了，使用TokuMX 默认的zlib压缩可以减少大量的磁盘空间占用（1/3-1/20）。</li>
-<li>更好的存储空间利用效率。MongoDB 空间释放是个麻烦的事情（需要drop 整个个数据库或者repair），TokuMX drop collect或者index即可释放空间。</li>
-<li>更好的内存管理。MongoDB nmap简单，但是不方便分配固定内存。caching和 IO都交由操作系统去调度，时间长了，数据大了容易造成内存泄露。TokuMX 通过参数指定cacheSize分配固定大小的内存（多实例环境这个非常适用，虽然不推荐使用多实例）。</li>
-<li>写优化。这个是TokuMX 最基础最根本的东西，在大数据量的情况下写入速度基本保持不变。MongoDB在超过1亿记录后或在数据比较大的情况下，写性能衰减得比较厉害，这一切归因于40年的B-tree索引，也正是TokuMX 分形树索引优化的地方。</li>
-<li>其他的特性，如document 级别的锁，事务支持等，这些不是我们所重的，实际效果还需时间检验。</li>
-</ul>
-<p>###不足：</p>
-<ul>
-<li>不支持，如geo索引，全文索引。</li>
-</ul>
-<p>###<a target="_blank" rel="noopener" href="http://www.luanxiang.org/blog/archives/1760.html">TokuMX的分形索引是什么？</a><br>这篇文章讲了tukumx的索引算法，一种改进版B-tree</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1379,7 +1429,7 @@ printer()  #Output: Foo!</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1390,7 +1440,7 @@ printer()  #Output: Foo!</code></pre>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
