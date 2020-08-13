@@ -1066,6 +1066,93 @@ def my_view(request):
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/02/03/2015-02-03-getting-started-with-spark-in-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/02/03/2015-02-03-getting-started-with-spark-in-python/" class="post-title-link" itemprop="url">getting started with spark in python -- notes</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-02-03 23:01:55" itemprop="dateCreated datePublished" datetime="2015-02-03T23:01:55+08:00">2015-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:44:07" itemprop="dateModified" datetime="2020-08-13T16:44:07+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://districtdatalabs.silvrback.com/getting-started-with-spark-in-python">Src link</a></p>
+<blockquote>
+<p>Hadoop is the standard tool for distributed computing across really large data sets and is the reason why you see “Big Data” on advertisements as you walk through the airport. It has become an operating system for Big Data, providing a rich ecosystem of tools and techniques that allow you to use a large cluster of relatively cheap commodity hardware to do computing at supercomputer scale. Two ideas from Google in 2003 and 2004 made Hadoop possible: a framework for distributed storage (The Google File System), which is implemented as HDFS in Hadoop, and a framework for distributed computing (MapReduce).</p>
+</blockquote>
+<blockquote>
+<p>These two ideas have been the prime drivers for the advent of scaling analytics, large scale machine learning, and other big data appliances for the last ten years! However, in technology terms, ten years is an incredibly long time, and there are some well-known limitations that exist, with MapReduce in particular. Notably, programming MapReduce is difficult. You have to chain Map and Reduce tasks together in multiple steps for most analytics. This has resulted in specialized systems for performing SQL-like computations or machine learning. Worse, MapReduce requires data to be serialized to disk between each step, which means that the I/O cost of a MapReduce job is high, making interactive analysis and iterative algorithms very expensive; and the thing is, almost all optimization and machine learning is iterative.</p>
+</blockquote>
+<p>值得注意的是做分析的时候需要手动分多步，把map和reduce任务串起来。本来mapreduce就是比较难的一个东西，再加上要用户自己组织任务这就更难了。所以hive，hbase之类sql式的产品应运而生。<br>Mapreduce任务需要在每次输入输出之间序列化数据到硬盘，如此导致大量I/O消耗。这就导致处理交互式分析和迭代类任务时整体性能开销变得很大。但是，几乎所有的机器学习算法和优化都是迭代的。。。</p>
+<blockquote>
+<p>To address these problems, Hadoop has been moving to a more general resource management framework for computation, YARN (Yet Another Resource Negotiator). YARN implements the next generation of MapReduce, but also allows applications to leverage distributed resources without having to compute with MapReduce. By generalizing the management of the cluster, research has moved toward generalizations of distributed computation, expanding the ideas first imagined in MapReduce.</p>
+</blockquote>
+<p>YARN改进了hadoop的资源管理和调度</p>
+<blockquote>
+<p>Spark is the first fast, general purpose distributed computing paradigm resulting from this shift and is gaining popularity rapidly. Spark extends the MapReduce model to support more types of computations using a functional programming paradigm, and it can cover a wide range of workflows that previously were implemented as specialized systems built on top of Hadoop. Spark uses in-memory caching to improve performance and, therefore, is fast enough to allow for interactive analysis (as though you were sitting on the Python interpreter, interacting with the cluster). Caching also improves the performance of iterative algorithms, which makes it great for data theoretic tasks, especially machine learning.</p>
+</blockquote>
+<p>Spark主要做了两个优化：</p>
+<ul>
+<li>使用函数式编程范式扩展mapreduce计算模型，并且兼容已有的工作流。</li>
+<li>Spark使用in-memory caching来改善性能，Job中间输出和结果可以保存在内存中不用读写硬盘。进而有够快的速度来处理交互式的分析，这也同时提高了处理迭代算法的速度。</li>
+</ul>
+<p><strong>TODO</strong></p>
+<p>配置单机spark环境</p>
+<p>edx 有门课程，到时候边上边把文章的剩余部分翻译了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/30/2015-01-30-reverse-linked-list/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1184,7 +1271,7 @@ if __name__ == &quot;__main__&quot;:
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/16/2015-01-16-about-thinking/">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/25/2015-01-25-python-interview-problem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1198,7 +1285,7 @@ if __name__ == &quot;__main__&quot;:
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/01/16/2015-01-16-about-thinking/" class="post-title-link" itemprop="url">思考学习乱谈</a>
+            <a href="/2015/01/25/2015-01-25-python-interview-problem/" class="post-title-link" itemprop="url">python interview problem</a>
         </h2>
 
         <div class="post-meta">
@@ -1208,14 +1295,14 @@ if __name__ == &quot;__main__&quot;:
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2015-01-16 22:06:53" itemprop="dateCreated datePublished" datetime="2015-01-16T22:06:53+08:00">2015-01-16</time>
+              <time title="Created: 2015-01-25 23:01:55" itemprop="dateCreated datePublished" datetime="2015-01-25T23:01:55+08:00">2015-01-25</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 16:32:00" itemprop="dateModified" datetime="2020-08-13T16:32:00+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-13 16:43:50" itemprop="dateModified" datetime="2020-08-13T16:43:50+08:00">2020-08-13</time>
               </span>
 
           
@@ -1229,162 +1316,188 @@ if __name__ == &quot;__main__&quot;:
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="由头："><a href="#由头：" class="headerlink" title="由头："></a>由头：</h2><p>看到阮一峰的博客文集出版: <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/12/my-blog-book.html">如何变得有思想?</a>，建议不差这几十块的同学买一本支持作者。虽然不买也能看，所有文章都在作者博客上了。<br>这本书集结了阮一峰十年博文，读了必有收获。</p>
-<h2 id="也聊下思考学习"><a href="#也聊下思考学习" class="headerlink" title="也聊下思考学习"></a>也聊下思考学习</h2><blockquote>
-<p>With great power comes great responsibility(能力越大责任越大)<br>                                                 —Uncle Ben      </p>
-</blockquote>
-<p>首先个人能力越高，个体价值越大，小可以养家糊口，大可以造福社会。那么个人能力主要包含什么？我觉得主要如下：</p>
-<ul>
-<li>生存技能</li>
-<li>学习能力</li>
-<li>强大的好奇心</li>
-<li>思考力</li>
-<li>情商</li>
-</ul>
-<h3 id="生存技能"><a href="#生存技能" class="headerlink" title="生存技能"></a>生存技能</h3><p>具体来说，就是能直接赚钱买饭吃的本事（野外求生之类的这里不讨论～～），比如写代码，比如电工、焊工、钳工等等，行行出状元。而个人所获得工资，通常和社会对你所掌握技能的需求成正比，和此类技能的总供应量成反比，掌握的技能越稀缺单价越高。<br>以IT业为例你会看到那门技术火，搞这门技术的同学工资就高。因为火的东西通常是新出，而新技术会的人少，进而得出供给不足。各类技能都是如此，那么如何掌握技能，就引出了下一个点。</p>
-<h3 id="学习能力"><a href="#学习能力" class="headerlink" title="学习能力"></a>学习能力</h3><p>上面说了，新技术往往单价更高，那么想要掌握新技术就需要去学习，学习能力重要性在此体现。因为新东西<strong>新</strong>（貌似是句废话～～），所以市面上会的人本就不多，如果能有人教你那是最好的。<br>但现实是牛人都忙着呢，没空教你。于是我们需要<strong>自学</strong>！</p>
-<h4 id="自学怎么学？"><a href="#自学怎么学？" class="headerlink" title="自学怎么学？"></a>自学怎么学？</h4><ul>
-<li>看书</li>
-<li>动手实践</li>
-<li>google</li>
-</ul>
-<p>看书和动手实践其实是老生常谈，古语有云，<strong>纸上得来终觉浅，绝知此事要躬行</strong>。以写代码为例，主要考动手来积累经验，来发现bug，熟能生巧。动手的过程中发现问题，书上没有于是我们google，不要问我为啥不用百度，请自己google。<br>这里要强调，如果你靠写代码混饭吃，那么一定把英语搞定，用google搜索英文关键词，事倍功半。翻墙啥的一定要会，我个人建议买vpn而不是折腾免费的，免费代理三天两头不稳定，耽误事。和获得的知识比起来vpn并不贵。</p>
-<h4 id="向牛人请教"><a href="#向牛人请教" class="headerlink" title="向牛人请教"></a>向牛人请教</h4><p>有机会的话这样学东西最快，牛人一句话，有时候让你少折腾一天甚至更久。问题是牛人少，可遇不可求，而且牛人成为牛人主要靠自学。。。<br>我的方法是多看博客，twitter，技术社区，订阅rss。偶尔参加真人活动，这个效果并不好。。。</p>
-<h3 id="强大的好奇心"><a href="#强大的好奇心" class="headerlink" title="强大的好奇心"></a>强大的好奇心</h3><p>保持好奇心，多了解各行各业，各种类型的知识，多接触不同行业的人。这样可以扩大知识面，所谓T行人才就是在钻研技术的同时，任然保持开放的心态，让自己有广度有见识。再引一句古语，<strong>读万卷书，行万里路</strong>，就是告诉我们，读了书不够用，还要多见识，多游历。<br>你今天用不到的知识也许明天就能帮上你。</p>
-<h3 id="思考力"><a href="#思考力" class="headerlink" title="思考力"></a>思考力</h3><p>这个词是<a target="_blank" rel="noopener" href="http://book.douban.com/subject/3138847/">思考的技术</a>中看来的，简单说来八个字，<strong>大膽假設，小心求證</strong>。找出问题本质才能真正解决问题。我们在工作、生活中经常要解决问题，而思考力的强弱决定了问题解决能力的强弱。<br><a target="_blank" rel="noopener" href="http://book.douban.com/review/2105845/">这是一位读者写的书评</a>，给出了这本书的概要，这里直接引用。  </p>
-<h3 id="情商"><a href="#情商" class="headerlink" title="情商"></a>情商</h3><p>Last but not least, 情商很重要！为人处世，行走江湖,光有技能是不够的，朋友要多，路子才能够野。</p>
-<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>你现在会什么不重要，重要的是有快速学习的能力，广阔的视野</p>
-<p>（推荐一篇大牛的文章做结尾，<a target="_blank" rel="noopener" href="http://mindhacks.cn/2008/12/18/how-to-think-straight/">如何清晰地思考</a>作者刘未鹏。）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/03/2015-01-13-mapreduce-design-patterns/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jie.Jia">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="J's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/01/03/2015-01-13-mapreduce-design-patterns/" class="post-title-link" itemprop="url">MapReduce Design Patterns</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-01-03 13:01:55" itemprop="dateCreated datePublished" datetime="2015-01-03T13:01:55+08:00">2015-01-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 16:23:38" itemprop="dateModified" datetime="2020-08-13T16:23:38+08:00">2020-08-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>推荐一个<strong>免费</strong>在线课程<a href="www.udacity.com">Intro to Hadoop and MapReduce</a><br>学完就算入门了，一个周末的时间就够。虽然大家都是直接hive或者pig，不手写mapreduce，不过了解一下思想还是不错的。</p>
-<hr>
-<table>
-<thead>
-<tr>
-<th>Filtering Patterns</th>
-<th>Summarization Patterns</th>
-<th>structural Patterns</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Sampling</td>
-<td>Countin  g</td>
-<td>Combining Data sets</td>
-</tr>
-<tr>
-<td>Top-N</td>
-<td>Mean</td>
-<td>XXXXXXX</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a>Sampling</h3><ul>
-<li>在mapper中根据条件取需要的字段输出</li>
-</ul>
-<h3 id="Top-10"><a href="#Top-10" class="headerlink" title="Top-10"></a>Top-10</h3><ul>
-<li>每个Mapper生成自己的top-N列表,最菜可以搞个排序，高级点用heap</li>
-<li>Reducer找到全局的top-N</li>
-</ul>
-<h3 id="Counting"><a href="#Counting" class="headerlink" title="Counting"></a>Counting</h3><ul>
-<li>经典的word count，例子一堆</li>
-</ul>
-<h3 id="Mean"><a href="#Mean" class="headerlink" title="Mean"></a>Mean</h3><ul>
-<li>Mapper抽取需要的（key，value）</li>
-<li>Reducer按照key计算平均数</li>
-</ul>
-<h3 id="Combining-Data-sets"><a href="#Combining-Data-sets" class="headerlink" title="Combining Data sets"></a>Combining Data sets</h3><ul>
-<li>Mapper读入原始数据提取join用的key，value是tag标记每行数据来源加上其他读入信息。</li>
-<li>Reducer根据tag合并数据</li>
-</ul>
-<h3 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h3><ul>
-<li>Read the book <strong>MapReduce Design Patterns</strong></li>
-</ul>
-<h3 id="MSIC"><a href="#MSIC" class="headerlink" title="MSIC"></a>MSIC</h3><ul>
-<li><p>单机测试命令，不然每次真跑慢死人~~</p>
-<pre><code>  cat file.txt | ./mapper.py |sort -k1 |./reducer.py</code></pre>
+          <p>一些关于python语言的题目，留档。<a target="_blank" rel="noopener" href="http://blog.csdn.net/caroline_wendy/article/details/25230835">源地址</a></p>
+<ol>
+<li>在python中, list, tuple, dict, set有什么区别, 主要应用在什么样的场景?</li>
+</ol>
+<p>list: 链表, 有序的项目, 通过索引进行查找, 使用方括号”[]”;<br>tuple: 元组, 元组将多样的对象集合到一起, 不能修改, 通过索引进行查找, 使用括号”()”;<br>dict: 字典, 字典是一组键(key)和值(value)的组合, 通过键(key)进行查找, 没有顺序, 使用大括号”{}”;<br>set: 集合,无序, 元素只出现一次, 自动去重, 使用”set([])”;</p>
+<p>应用场景:<br>list, 简单的数据集合, 可以使用索引;<br>tuple, 把一些数据当做一个整体去使用, 不能修改;<br>dict, 使用键值和值进行关联的数据;<br>set, 数据只出现一次, 只关心数据是否出现, 不关心其位置;</p>
+<ol start="2">
+<li>静态函数, 类函数, 成员函数的区别?</li>
+</ol>
+<p>静态函数(@staticmethod): 即静态方法,主要处理与这个类的逻辑关联;<br>类函数(@classmethod): 即类方法, 更关注于从类中调用方法, 而不是在实例中调用方法, 可以用作方法重载, 传入参数cls;<br>成员函数: 实例的方法, 只能通过实例进行调用;</p>
+<p>具体应用:<br>日期的方法, 可以通过实例化(<strong>init</strong>)进行数据输出, 传入参数self;<br>可以通过类的方法(@classmethod)进行数据转换, 传入参数cls;<br>可以通过静态方法(@staticmethod)进行数据验证;</p>
+<ol start="4">
+<li>写一个函数, 输入一个字符串, 返回倒序排列的结果: 如: string_reverse(‘abcdef’), 返回: ‘fedcba’<br>(请采用多种方法实现, 并对实现方法进行比较)<br>解答:<br> 5种方法的比较:<ol>
+<li>简单的步长为-1, 即字符串的翻转;</li>
+<li>交换前后字母的位置;</li>
+<li>递归的方式, 每次输出一个字符;</li>
+<li>双端队列, 使用extendleft()函数;</li>
+<li>使用for循环, 从左至右输出;</li>
+</ol>
 </li>
-</ul>
-<ul>
-<li><p>用-combiner参数可以在本地先做一部分reduce</p>
-</li>
-<li><p>Alis，放到 .bashrc 里少敲一点是一点</p>
-<pre><code>  run_mapreduce() &#123;
-      hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.1.1.jar -mapper $1 -reducer $2 -file $1 -file $2 -input $3 -output $4
-  &#125;
+</ol>
+<pre><code>string = &#39;abcdef&#39;
 
-  run_mapreduce_with_combiner()&#123;
-      hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.1.1.jar -mapper $1 -reducer $2 -combiner $2 -file $1 -file $2 -input $3 -output $4
-  &#125;
+def string_reverse1(string):
+    return string[::-1]
 
-  alias hs=run_mapreduce
-  alias hsc=run_mapreduce_with_combiner</code></pre>
+
+def string_reverse2(string):
+    t = list(string)
+    l = len(t)
+    for i,j in zip(range(l-1, 0, -1), range(l//2)):
+        t[i], t[j] = t[j], t[i]
+    return &quot;&quot;.join(t)
+
+
+def string_reverse3(string):
+    if len(string) &lt;= 1:
+        return string
+    return string_reverse3(string[1:]) + string[0]
+
+
+from collections import deque
+def string_reverse4(string):
+    d = deque()
+    d.extendleft(string)
+    return &#39;&#39;.join(d)
+
+
+def string_reverse5(string):
+    #return &#39;&#39;.join(string[len(string) - i] for i in range(1, len(string)+1))
+    return &#39;&#39;.join(string[i] for i in range(len(string)-1, -1, -1))
+
+
+print(string_reverse1(string))
+print(string_reverse2(string))
+print(string_reverse3(string))
+print(string_reverse4(string))
+print(string_reverse5(string))</code></pre>
+<ol start="5">
+<li>请用自己的算法, 按升序合并如下两个list, 并去除重复的元素:</li>
+</ol>
+<pre><code>list1 = [2, 3, 8, 4, 9, 5, 6]
+list2 = [5, 6, 10, 17, 11, 2]
+import random
+list1 = [2, 3, 8, 4, 9, 5, 6]  
+list2 = [5, 6, 10, 17, 11, 2]  
+
+
+def qsort(L):  
+   if len(L)&lt;2: return L  
+   pivot_element = random.choice(L)  
+   small = [i for i in L if i&lt; pivot_element]  
+   large = [i for i in L if i&gt; pivot_element]  
+   return qsort(small) + [pivot_element] + qsort(large)  
+
+
+def merge(list1, list2):  
+    return qsort(list1 + list2)  
+
+
+print(merge(list1, list2))  </code></pre>
+<ol start="6">
+<li>请写出打印结果</li>
+</ol>
+<pre><code>x = [0, 1]
+i = 0
+i, x[i] = 1, 2
+print(x)</code></pre>
+<p>打印结果: [0, 2], python可以使用连续赋值, 从左至右.</p>
+<pre><code>g = lambda x, y=2, z : x + y**z
+g(1, z=10) = ?</code></pre>
+<p>打印结果: 异常, 形参表末尾才可以有默认参数, z需要提供默认参数.</p>
+<ol start="7">
+<li>说一下以下代码片段存在的问题</li>
+</ol>
+<pre><code>from amodule import * # amodule is an exist module  
+
+class dummyclass(object):  
+    def __init__(self):  
+        self.is_d = True  
+        pass  
+
+class childdummyclass(dummyclass):  
+    def __init__(self, isman):  
+        self.isman = isman  
+
+    @classmethod  
+    def can_speak(self): return True  
+
+    @property  
+    def man(self): return self.isman  
+
+if __name__ == &quot;__main__&quot;:  
+    object = new childdummyclass(True)  
+    print object.can_speak()  
+    print object.man()  
+    print object.is_d  </code></pre>
+<p>解答: </p>
+<ol>
+<li><p>警告: object是python新形式(new style)的一个基础类, 不应该被重新定义;</p>
 </li>
-<li><p>Map阶段和shuffle阶段是可以交替进行的，并不是要等所有的map结束才能进行下一个阶段。</p>
+<li><p>警告: 类方法(classmethod)是类所拥有的方法, 传入的参数应该是cls, 而不是self;</p>
 </li>
-</ul>
+<li><p>错误: Python没有new关键字, 如需修改new, 如单例模式, 可以重写(override)<strong>new</strong>;</p>
+</li>
+<li><p>错误: @property, 表示属性, 不是方法, 则不需要加括号”()”, 直接调用object.man, 即可;</p>
+</li>
+<li><p>错误: 如果想使用基类的成员, 则需要初始化基类, 如dummyclass.<strong>init</strong>(self), 即可;</p>
+</li>
+<li><p>额外: 类名尽量使用大写.</p>
+</li>
+<li><p>介绍一下python的异常处理机制和自己开发过程中的体会</p>
+</li>
+</ol>
+<p>解答:<br>Python的异常处理机制:<br>try: 尝试抛出异常;<br>raise: 引发异常;<br>except: 处理异常;<br>finally: 是否发生异常都需要做的事情;</p>
+<p>创建新的异常类型, 需要继承Exception类, 可以定义类的属性, 便于处理异常;</p>
+<p>开发体会:<br>异常主要处理读取文件, 也可以使用with的方法读取文件; 还可以用于网络连接, 异常可以包含大量的错误信息, 进行错误处理.</p>
+<p>问题一：以下的代码的输出将是什么? 说出你的答案并解释。</p>
+<p>class Parent(object):<br>    x = 1</p>
+<p>class Child1(Parent):<br>    pass</p>
+<p>class Child2(Parent):<br>    pass</p>
+<p>print Parent.x, Child1.x, Child2.x<br>Child1.x = 2<br>print Parent.x, Child1.x, Child2.x<br>Parent.x = 3<br>print Parent.x, Child1.x, Child2.x<br>答案</p>
+<p>以上代码的输出是：</p>
+<p>1 1 1<br>1 2 1<br>3 2 3<br>使你困惑或是惊奇的是关于最后一行的输出是 3 2 3 而不是 3 2 1。为什么改变了 Parent.x 的值还会改变 Child2.x 的值，但是同时 Child1.x 值却没有改变？</p>
+<p>这个答案的关键是，在 Python 中，类变量在内部是作为字典处理的。如果一个变量的名字没有在当前类的字典中发现，将搜索祖先类（比如父类）直到被引用的变量名被找到（如果这个被引用的变量名既没有在自己所在的类又没有在祖先类中找到，会引发一个 AttributeError 异常 ）。</p>
+<p>因此，在父类中设置 x = 1 会使得类变量 X 在引用该类和其任何子类中的值为 1。这就是因为第一个 print 语句的输出是 1 1 1。</p>
+<p>随后，如果任何它的子类重写了该值（例如，我们执行语句 Child1.x = 2），然后，该值仅仅在子类中被改变。这就是为什么第二个 print 语句的输出是 1 2 1。</p>
+<p>最后，如果该值在父类中被改变（例如，我们执行语句 Parent.x = 3），这个改变会影响到任何未重写该值的子类当中的值（在这个示例中被影响的子类是 Child2）。这就是为什么第三个 print 输出是 3 2 3。</p>
+<p>问题三：以下代码将输出什么?</p>
+<p>list = [‘a’, ‘b’, ‘c’, ‘d’, ‘e’]<br>print list[10:]</p>
+<p>答案</p>
+<p>以上代码将输出 []，并且不会导致一个 IndexError。</p>
+<p>正如人们所期望的，试图访问一个超过列表索引值的成员将导致 IndexError（比如访问以上列表的 list[10]）。尽管如此，试图访问一个列表的以超出列表成员数作为开始索引的切片将不会导致 IndexError，并且将仅仅返回一个空列表。</p>
+<p>一个讨厌的小问题是它会导致出现 bug ，并且这个问题是难以追踪的，因为它在运行时不会引发错误。</p>
+<p>问题四：以下的代码的输出将是什么? 说出你的答案并解释？</p>
+<p>def multipliers():<br>    return [lambda x : i * x for i in range(4)]</p>
+<p>print [m(2) for m in multipliers()]</p>
+<p>你将如何修改 multipliers 的定义来产生期望的结果</p>
+<p>答案</p>
+<p>以上代码的输出是 [6, 6, 6, 6] （而不是 [0, 2, 4, 6]）。</p>
+<p>这个的原因是 Python 的闭包的后期绑定导致的 late binding，这意味着在闭包中的变量是在内部函数被调用的时候被查找。所以结果是，当任何 multipliers() 返回的函数被调用，在那时，i 的值是在它被调用时的周围作用域中查找，到那时，无论哪个返回的函数被调用，for 循环都已经完成了，i 最后的值是 3，因此，每个返回的函数 multiplies 的值都是 3。因此一个等于 2 的值被传递进以上代码，它们将返回一个值 6 （比如： 3 x 2）。</p>
+<p>（顺便说下，正如在 The Hitchhiker’s Guide to Python 中指出的，这里有一点普遍的误解，是关于 lambda 表达式的一些东西。一个 lambda 表达式创建的函数不是特殊的，和使用一个普通的 def 创建的函数展示的表现是一样的。）</p>
+<p>这里有两种方法解决这个问题。</p>
+<p>最普遍的解决方案是创建一个闭包，通过使用默认参数立即绑定它的参数。例如：</p>
+<p>def multipliers():<br>    return [lambda x, i=i : i * x for i in range(4)]</p>
+<p>另外一个选择是，你可以使用 functools.partial 函数：</p>
+<p>from functools import partial<br>from operator import mul</p>
+<p>def multipliers():<br>    return [partial(mul, i) for i in range(4)]</p>
+<p>问题五：以下的代码的输出将是什么? 说出你的答案并解释？</p>
+<p>def extendList(val, list=[]):<br>    list.append(val)<br>    return list</p>
+<p>list1 = extendList(10)<br>list2 = extendList(123,[])<br>list3 = extendList(‘a’)</p>
+<p>print “list1 = %s” % list1<br>print “list2 = %s” % list2<br>print “list3 = %s” % list3</p>
+<p>你将如何修改 extendList 的定义来产生期望的结果</p>
+<p>以上代码的输出为：</p>
+<p>list1 = [10, ‘a’]<br>list2 = [123]<br>list3 = [10, ‘a’]</p>
+<p>许多人会错误的认为 list1 应该等于 [10] 以及 list3 应该等于 [‘a’]。认为 list 的参数会在 extendList 每次被调用的时候会被设置成它的默认值 []。</p>
+<p>尽管如此，实际发生的事情是，新的默认列表仅仅只在函数被定义时创建一次。随后当 extendList 没有被指定的列表参数调用的时候，其使用的是同一个列表。这就是为什么当函数被定义的时候，表达式是用默认参数被计算，而不是它被调用的时候。</p>
+<p>因此，list1 和 list3 是操作的相同的列表。而 ````list2是操作的它创建的独立的列表（通过传递它自己的空列表作为list``` 参数的值）。</p>
+<p>extendList 函数的定义可以做如下修改，但，当没有新的 list 参数被指定的时候，会总是开始一个新列表，这更加可能是一直期望的行为。</p>
+<p>def extendList(val, list=None):<br>    if list is None:<br>        list = []<br>    list.append(val)<br>    return list</p>
+<p>使用这个改进的实现，输出将是：</p>
+<p>list1 = [10]<br>list2 = [123]<br>list3 = [‘a’]</p>
 
       
     </div>
@@ -1403,7 +1516,7 @@ if __name__ == &quot;__main__&quot;:
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1469,18 +1582,18 @@ if __name__ == &quot;__main__&quot;:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

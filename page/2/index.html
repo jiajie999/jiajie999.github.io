@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/10/08/concurrency-is-not-parallelism/">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/22/2015-01-22-fork-problem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/10/08/concurrency-is-not-parallelism/" class="post-title-link" itemprop="url">Concurrency is not Parallelism</a>
+            <a href="/2015/01/22/2015-01-22-fork-problem/" class="post-title-link" itemprop="url">Fork problem</a>
         </h2>
 
         <div class="post-meta">
@@ -179,14 +179,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2014-10-08 22:06:53" itemprop="dateCreated datePublished" datetime="2014-10-08T22:06:53+08:00">2014-10-08</time>
+              <time title="Created: 2015-01-22 23:01:55" itemprop="dateCreated datePublished" datetime="2015-01-22T23:01:55+08:00">2015-01-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 15:52:04" itemprop="dateModified" datetime="2020-08-13T15:52:04+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-13 16:43:50" itemprop="dateModified" datetime="2020-08-13T16:43:50+08:00">2020-08-13</time>
               </span>
 
           
@@ -200,29 +200,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>##并发 vs. 并行</p>
-<p>并发是指同时处理很多事情。</p>
-<p>而并行是指同时能完成很多事情。</p>
-<p>两者不同，但相关。</p>
-<p>一个重点是组合，一个重点是执行。</p>
-<p>并发提供了一种方式让我们能够设计一种方案将问题(非必须的)并行的解决。</p>
-<p>地鼠的例子<a target="_blank" rel="noopener" href="http://www.vaikan.com/docs/Concurrency-is-not-Parallelism">源ppt地址</a></p>
-<p><strong>习得</strong></p>
-<p>有很多分解流程的方式。</p>
-<p>这都是并发设计。</p>
-<p>一旦完成了分解，并行可能会丧失，但很容易纠正。</p>
-<p>##并发是并行成为可能</p>
-<p>这个负载均衡的例子具有很明显的并行和可扩展性。</p>
-<p>Worker数可以非常巨大。</p>
-<p>Go语言的这种并发特征能的开发一个安全的、好用的、可扩展的、并行的软件变得很容易</p>
-<p>##并发简化了同步</p>
-<p>没有明显的需要同步的操作。</p>
-<p>程序的这种设计隐含的实现了同步。</p>
-<p>##结论</p>
-<p>并发很强大。</p>
-<p>并发不是并行。</p>
-<p>并发帮助实现并行。</p>
-<p>并发使并行(扩展等)变得容易。</p>
+          <p>问题：</p>
+<ol>
+<li><p>执行这段代码后共有几个进程执行？ </p>
+</li>
+<li><p>已知其中一个进程的输出结果<code>pid1:1001, pid2:1002</code>，其他输出的是啥？不用考虑顺序</p>
+</li>
+</ol>
+<pre><code>    include &quot;stdio.h&quot;
+
+    include &quot;sys/types.h&quot;
+
+    include &quot;unistd.h&quot;
+
+    int main()
+    &#123;
+        pid_t pid1;
+        pid_t pid2;
+
+        pid1 = fork();
+        pid2 = fork();
+
+        printf(&quot;pid1:%d, pid2:%d\n&quot;, pid1, pid2);
+    &#125;</code></pre>
+<p>分析：</p>
+<ul>
+<li>fork会复制出一个与当前进程一样的进程。拷贝各种相关变量，作为原进程的子进程出现在linux的进程表中。</li>
+<li>进程树形图：</li>
+</ul>
+<p><img src="/static/fork_tree.gif" alt="fork-tree"></p>
+<ul>
+<li>fork()在父进程中返回子进程号，在子进程中返回0</li>
+</ul>
+<p>有了上面三点答案就很明显了～～</p>
 
       
     </div>
@@ -242,7 +252,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/08/19/ChangeSRCforRuby/">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/16/2015-01-16-about-thinking/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -256,7 +266,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/08/19/ChangeSRCforRuby/" class="post-title-link" itemprop="url">Change your gem source if your living in china...</a>
+            <a href="/2015/01/16/2015-01-16-about-thinking/" class="post-title-link" itemprop="url">思考学习乱谈</a>
         </h2>
 
         <div class="post-meta">
@@ -266,14 +276,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2014-08-19 22:06:53" itemprop="dateCreated datePublished" datetime="2014-08-19T22:06:53+08:00">2014-08-19</time>
+              <time title="Created: 2015-01-16 22:06:53" itemprop="dateCreated datePublished" datetime="2015-01-16T22:06:53+08:00">2015-01-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 16:04:27" itemprop="dateModified" datetime="2020-08-13T16:04:27+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-13 16:32:00" itemprop="dateModified" datetime="2020-08-13T16:32:00+08:00">2020-08-13</time>
               </span>
 
           
@@ -287,15 +297,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>感谢taobao提供这个源，FUC××××××WALL！！！ <a target="_blank" rel="noopener" href="https://ruby.taobao.org/">taobao源地址</a></p>
-<pre><code>$ gem sources --remove https://rubygems.org/
-$ gem sources -a https://ruby.taobao.org/
-$ gem sources -l
-*** CURRENT SOURCES ***
-
-https://ruby.taobao.org
-# 请确保只有 ruby.taobao.org
-$ gem install rails</code></pre>
+          <h2 id="由头："><a href="#由头：" class="headerlink" title="由头："></a>由头：</h2><p>看到阮一峰的博客文集出版: <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/12/my-blog-book.html">如何变得有思想?</a>，建议不差这几十块的同学买一本支持作者。虽然不买也能看，所有文章都在作者博客上了。<br>这本书集结了阮一峰十年博文，读了必有收获。</p>
+<h2 id="也聊下思考学习"><a href="#也聊下思考学习" class="headerlink" title="也聊下思考学习"></a>也聊下思考学习</h2><blockquote>
+<p>With great power comes great responsibility(能力越大责任越大)<br>                                                 —Uncle Ben      </p>
+</blockquote>
+<p>首先个人能力越高，个体价值越大，小可以养家糊口，大可以造福社会。那么个人能力主要包含什么？我觉得主要如下：</p>
+<ul>
+<li>生存技能</li>
+<li>学习能力</li>
+<li>强大的好奇心</li>
+<li>思考力</li>
+<li>情商</li>
+</ul>
+<h3 id="生存技能"><a href="#生存技能" class="headerlink" title="生存技能"></a>生存技能</h3><p>具体来说，就是能直接赚钱买饭吃的本事（野外求生之类的这里不讨论～～），比如写代码，比如电工、焊工、钳工等等，行行出状元。而个人所获得工资，通常和社会对你所掌握技能的需求成正比，和此类技能的总供应量成反比，掌握的技能越稀缺单价越高。<br>以IT业为例你会看到那门技术火，搞这门技术的同学工资就高。因为火的东西通常是新出，而新技术会的人少，进而得出供给不足。各类技能都是如此，那么如何掌握技能，就引出了下一个点。</p>
+<h3 id="学习能力"><a href="#学习能力" class="headerlink" title="学习能力"></a>学习能力</h3><p>上面说了，新技术往往单价更高，那么想要掌握新技术就需要去学习，学习能力重要性在此体现。因为新东西<strong>新</strong>（貌似是句废话～～），所以市面上会的人本就不多，如果能有人教你那是最好的。<br>但现实是牛人都忙着呢，没空教你。于是我们需要<strong>自学</strong>！</p>
+<h4 id="自学怎么学？"><a href="#自学怎么学？" class="headerlink" title="自学怎么学？"></a>自学怎么学？</h4><ul>
+<li>看书</li>
+<li>动手实践</li>
+<li>google</li>
+</ul>
+<p>看书和动手实践其实是老生常谈，古语有云，<strong>纸上得来终觉浅，绝知此事要躬行</strong>。以写代码为例，主要考动手来积累经验，来发现bug，熟能生巧。动手的过程中发现问题，书上没有于是我们google，不要问我为啥不用百度，请自己google。<br>这里要强调，如果你靠写代码混饭吃，那么一定把英语搞定，用google搜索英文关键词，事倍功半。翻墙啥的一定要会，我个人建议买vpn而不是折腾免费的，免费代理三天两头不稳定，耽误事。和获得的知识比起来vpn并不贵。</p>
+<h4 id="向牛人请教"><a href="#向牛人请教" class="headerlink" title="向牛人请教"></a>向牛人请教</h4><p>有机会的话这样学东西最快，牛人一句话，有时候让你少折腾一天甚至更久。问题是牛人少，可遇不可求，而且牛人成为牛人主要靠自学。。。<br>我的方法是多看博客，twitter，技术社区，订阅rss。偶尔参加真人活动，这个效果并不好。。。</p>
+<h3 id="强大的好奇心"><a href="#强大的好奇心" class="headerlink" title="强大的好奇心"></a>强大的好奇心</h3><p>保持好奇心，多了解各行各业，各种类型的知识，多接触不同行业的人。这样可以扩大知识面，所谓T行人才就是在钻研技术的同时，任然保持开放的心态，让自己有广度有见识。再引一句古语，<strong>读万卷书，行万里路</strong>，就是告诉我们，读了书不够用，还要多见识，多游历。<br>你今天用不到的知识也许明天就能帮上你。</p>
+<h3 id="思考力"><a href="#思考力" class="headerlink" title="思考力"></a>思考力</h3><p>这个词是<a target="_blank" rel="noopener" href="http://book.douban.com/subject/3138847/">思考的技术</a>中看来的，简单说来八个字，<strong>大膽假設，小心求證</strong>。找出问题本质才能真正解决问题。我们在工作、生活中经常要解决问题，而思考力的强弱决定了问题解决能力的强弱。<br><a target="_blank" rel="noopener" href="http://book.douban.com/review/2105845/">这是一位读者写的书评</a>，给出了这本书的概要，这里直接引用。  </p>
+<h3 id="情商"><a href="#情商" class="headerlink" title="情商"></a>情商</h3><p>Last but not least, 情商很重要！为人处世，行走江湖,光有技能是不够的，朋友要多，路子才能够野。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>你现在会什么不重要，重要的是有快速学习的能力，广阔的视野</p>
+<p>（推荐一篇大牛的文章做结尾，<a target="_blank" rel="noopener" href="http://mindhacks.cn/2008/12/18/how-to-think-straight/">如何清晰地思考</a>作者刘未鹏。）</p>
 
       
     </div>
@@ -315,7 +342,7 @@ $ gem install rails</code></pre>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/08/14/closures-in-python/">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/07/2015-01-07-record-blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -329,7 +356,7 @@ $ gem install rails</code></pre>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/08/14/closures-in-python/" class="post-title-link" itemprop="url">Python的闭包</a>
+            <a href="/2015/01/07/2015-01-07-record-blog/" class="post-title-link" itemprop="url">Good to read</a>
         </h2>
 
         <div class="post-meta">
@@ -339,99 +366,14 @@ $ gem install rails</code></pre>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2014-08-14 22:06:53" itemprop="dateCreated datePublished" datetime="2014-08-14T22:06:53+08:00">2014-08-14</time>
+              <time title="Created: 2015-01-07 23:01:55" itemprop="dateCreated datePublished" datetime="2015-01-07T23:01:55+08:00">2015-01-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 15:52:04" itemprop="dateModified" datetime="2020-08-13T15:52:04+08:00">2020-08-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/4020419/closures-in-python">SO上关于Python闭包问题的最佳答案</a></p>
-<p>A closure occurs when a function has access to a local variable from an enclosing scope that has finished its execution.</p>
-<pre><code>def make_printer(msg):
-    def printer():
-        print msg
-    return printer
-
-printer = make_printer(&#39;Foo!&#39;)
-printer()</code></pre>
-<p>When make_printer is called, a new frame is put on the stack with the compiled code for the printer function as a constant and the value of msg as a local. It then creates and returns the function. Because the function printer references the msg variable, it is kept alive after the make_printer function has returned.</p>
-<p>So, if your nested functions don’t</p>
-<p>access variables that are local to enclosing scopes,<br>do so when they are executed outside of that scope,<br>then they are not closures.</p>
-<p>Here’s an example of a nested function which is not a closure.</p>
-<pre><code>def make_printer(msg):
-    def printer(msg=msg):
-        print msg
-    return printer
-
-printer = make_printer(&quot;Foo!&quot;)
-printer()  #Output: Foo!</code></pre>
-<p>Here, we are binding the value to the default value of a parameter. This occurs when the function printer is created and so no reference to the value of msg external to printer needs to be maintained after make_printer returns. msg is just a normal local variable of the function printer in this context.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/07/15/tukumx-is-better-than-mongo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jie.Jia">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="J's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/07/15/tukumx-is-better-than-mongo/" class="post-title-link" itemprop="url">TukuMX is better than mongo?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-07-15 20:06:53" itemprop="dateCreated datePublished" datetime="2014-07-15T20:06:53+08:00">2014-07-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 15:52:04" itemprop="dateModified" datetime="2020-08-13T15:52:04+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-13 16:43:50" itemprop="dateModified" datetime="2020-08-13T16:43:50+08:00">2020-08-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -439,7 +381,7 @@ printer()  #Output: Foo!</code></pre>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mongo/" itemprop="url" rel="index"><span itemprop="name">mongo</span></a>
+                  <a href="/categories/record/" itemprop="url" rel="index"><span itemprop="name">record</span></a>
                 </span>
             </span>
 
@@ -454,20 +396,1122 @@ printer()  #Output: Foo!</code></pre>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>今天在网上看到一个TukuMX的开源项目，算是mongodb的一个分支项目。也是由一家商业公司开源出来，并同时提供商业版本，记录一些点备查。</p>
-<p>###亮点：</p>
-<ul>
-<li>压缩。MongoDB BSON格式的带来的存储空间消耗实在是太大了，使用TokuMX 默认的zlib压缩可以减少大量的磁盘空间占用（1/3-1/20）。</li>
-<li>更好的存储空间利用效率。MongoDB 空间释放是个麻烦的事情（需要drop 整个个数据库或者repair），TokuMX drop collect或者index即可释放空间。</li>
-<li>更好的内存管理。MongoDB nmap简单，但是不方便分配固定内存。caching和 IO都交由操作系统去调度，时间长了，数据大了容易造成内存泄露。TokuMX 通过参数指定cacheSize分配固定大小的内存（多实例环境这个非常适用，虽然不推荐使用多实例）。</li>
-<li>写优化。这个是TokuMX 最基础最根本的东西，在大数据量的情况下写入速度基本保持不变。MongoDB在超过1亿记录后或在数据比较大的情况下，写性能衰减得比较厉害，这一切归因于40年的B-tree索引，也正是TokuMX 分形树索引优化的地方。</li>
-<li>其他的特性，如document 级别的锁，事务支持等，这些不是我们所重的，实际效果还需时间检验。</li>
+          <ul>
+<li><a target="_blank" rel="noopener" href="http://blog.ionelmc.ro/2014/12/28/terrible-choices-mysql/#the-inflexibility">Terrible choices: MySQL</a></li>
 </ul>
-<p>###不足：</p>
+<p>此文点出了django下使用mysql遇到的坑</p>
 <ul>
-<li>不支持，如geo索引，全文索引。</li>
+<li><a target="_blank" rel="noopener" href="http://www.36dsj.com/archives/18821">大数据工程师飞林沙的年终总结&amp;算法数据的思考</a></li>
 </ul>
-<p>###<a target="_blank" rel="noopener" href="http://www.luanxiang.org/blog/archives/1760.html">TokuMX的分形索引是什么？</a><br>这篇文章讲了tukumx的索引算法，一种改进版B-tree</p>
+<p>写的比较落地，有些场景似曾相识啊</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://yafeilee.me/blogs/54995f3a6c69342f6d100000">2014年WEB高手都在做什么</a></li>
+</ul>
+<p>作者对当前前端技术的主流工作流程和框架做了简介，个人觉得做技术不分前后，啥都懂点才不会轻易被忽悠。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.cafepy.com/article/python_attributes_and_methods/python_attributes_and_methods.html">Python Attributes and Methods</a></li>
+</ul>
+<p>详细讲解python方法和属性</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html">Python Types and Objects</a></li>
+</ul>
+<p>详细讲解python类型和对象</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://tobegit3hub1.gitbooks.io/understanding-linux-processes/">理解linux进程gitbook</a></li>
+</ul>
+<p>用go和docker讲解进程相关概念，浅显易懂。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/03/2015-01-13-mapreduce-design-patterns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/01/03/2015-01-13-mapreduce-design-patterns/" class="post-title-link" itemprop="url">MapReduce Design Patterns</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-01-03 13:01:55" itemprop="dateCreated datePublished" datetime="2015-01-03T13:01:55+08:00">2015-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:23:38" itemprop="dateModified" datetime="2020-08-13T16:23:38+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>推荐一个<strong>免费</strong>在线课程<a href="www.udacity.com">Intro to Hadoop and MapReduce</a><br>学完就算入门了，一个周末的时间就够。虽然大家都是直接hive或者pig，不手写mapreduce，不过了解一下思想还是不错的。</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Filtering Patterns</th>
+<th>Summarization Patterns</th>
+<th>structural Patterns</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sampling</td>
+<td>Countin  g</td>
+<td>Combining Data sets</td>
+</tr>
+<tr>
+<td>Top-N</td>
+<td>Mean</td>
+<td>XXXXXXX</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a>Sampling</h3><ul>
+<li>在mapper中根据条件取需要的字段输出</li>
+</ul>
+<h3 id="Top-10"><a href="#Top-10" class="headerlink" title="Top-10"></a>Top-10</h3><ul>
+<li>每个Mapper生成自己的top-N列表,最菜可以搞个排序，高级点用heap</li>
+<li>Reducer找到全局的top-N</li>
+</ul>
+<h3 id="Counting"><a href="#Counting" class="headerlink" title="Counting"></a>Counting</h3><ul>
+<li>经典的word count，例子一堆</li>
+</ul>
+<h3 id="Mean"><a href="#Mean" class="headerlink" title="Mean"></a>Mean</h3><ul>
+<li>Mapper抽取需要的（key，value）</li>
+<li>Reducer按照key计算平均数</li>
+</ul>
+<h3 id="Combining-Data-sets"><a href="#Combining-Data-sets" class="headerlink" title="Combining Data sets"></a>Combining Data sets</h3><ul>
+<li>Mapper读入原始数据提取join用的key，value是tag标记每行数据来源加上其他读入信息。</li>
+<li>Reducer根据tag合并数据</li>
+</ul>
+<h3 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h3><ul>
+<li>Read the book <strong>MapReduce Design Patterns</strong></li>
+</ul>
+<h3 id="MSIC"><a href="#MSIC" class="headerlink" title="MSIC"></a>MSIC</h3><ul>
+<li><p>单机测试命令，不然每次真跑慢死人~~</p>
+<pre><code>  cat file.txt | ./mapper.py |sort -k1 |./reducer.py</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>用-combiner参数可以在本地先做一部分reduce</p>
+</li>
+<li><p>Alis，放到 .bashrc 里少敲一点是一点</p>
+<pre><code>  run_mapreduce() &#123;
+      hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.1.1.jar -mapper $1 -reducer $2 -file $1 -file $2 -input $3 -output $4
+  &#125;
+
+  run_mapreduce_with_combiner()&#123;
+      hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.1.1.jar -mapper $1 -reducer $2 -combiner $2 -file $1 -file $2 -input $3 -output $4
+  &#125;
+
+  alias hs=run_mapreduce
+  alias hsc=run_mapreduce_with_combiner</code></pre>
+</li>
+<li><p>Map阶段和shuffle阶段是可以交替进行的，并不是要等所有的map结束才能进行下一个阶段。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2015/01/02/2015-01-2-my-python-challenge-solution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/01/02/2015-01-2-my-python-challenge-solution/" class="post-title-link" itemprop="url">My python challenge solution</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-01-02 23:01:55" itemprop="dateCreated datePublished" datetime="2015-01-02T23:01:55+08:00">2015-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:41:06" itemprop="dateModified" datetime="2020-08-13T16:41:06+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>I start play with python challenge on 24 Feb 2012 and stop at level 10.</p>
+<p>Two years passed and i forgot there is a repo for it.</p>
+<p>Suddenly, I saw someone post a link to a qq group which is python challenge’s link and saying how funny it is.</p>
+<p>Maybe it’s time to finish the work …</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jiajie999/PythonChallenge">My answer for PythonChallenge</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/12/27/2014-12-27-deployment-flask-under-nginx-gunicorn-and-supervisor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/12/27/2014-12-27-deployment-flask-under-nginx-gunicorn-and-supervisor/" class="post-title-link" itemprop="url">Deployment flask under nginx gunicorn and supervisor</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-12-27 23:01:55" itemprop="dateCreated datePublished" datetime="2014-12-27T23:01:55+08:00">2014-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:40:27" itemprop="dateModified" datetime="2020-08-13T16:40:27+08:00">2020-08-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OPS/" itemprop="url" rel="index"><span itemprop="name">OPS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装基本的rpm包"><a href="#安装基本的rpm包" class="headerlink" title="安装基本的rpm包"></a>安装基本的rpm包</h2><pre><code>yum groupinstall -y development
+yum install cp  libxml2 libxml2-devel python-setuptools zlib-devel wget openssl-devel pcre pcre-devel sudo gcc make autoconf automake
+easy_install pip
+pip install virtualenv virtualenvwrapper gunicorn supervisor
+echo_supervisord_conf &gt; /etc/supervisord.conf
+
+
+[program:rest-api]
+command = /usr/bin/python /usr/bin/gunicorn -b 0.0.0.0:7000 runserver:app
+directory = /usr/lib/python2.6/site-packages/zbs/rest_zbs
+user = root
+autostart = true
+autorestart = true
+stderr_logfile = /var/log/zbs/rest-api.log
+stdout_logfile = /var/log/zbs/rest-api.log
+
+supervisord -c /etc/supervisord.conf</code></pre>
+<p><strong>每次修改配置文件后要执行</strong></p>
+<pre><code>supervisorctl reread 
+supervisorctl update
+supervisorctl start rest-api</code></pre>
+<h2 id="编写init-d脚本"><a href="#编写init-d脚本" class="headerlink" title="编写init.d脚本"></a>编写init.d脚本</h2><p>vim /etc/rc.d/init.d/supervisord</p>
+<pre><code>#!/bin/sh
+#
+# /etc/rc.d/init.d/supervisord
+#
+# Supervisor is a client/server system that
+# allows its users to monitor and control a
+# number of processes on UNIX-like operating
+# systems.
+#
+# chkconfig: - 64 36
+# description: Supervisor Server
+# processname: supervisord
+
+# Source init functions
+. /etc/rc.d/init.d/functions
+
+prog=&quot;supervisord&quot;
+
+prefix=&quot;/usr/&quot;
+exec_prefix=&quot;$&#123;prefix&#125;&quot;
+prog_bin=&quot;$&#123;exec_prefix&#125;/bin/supervisord&quot;
+PIDFILE=&quot;/var/run/$prog.pid&quot;
+
+start()
+&#123;
+       echo -n $&quot;Starting $prog: &quot;
+       daemon $prog_bin --pidfile $PIDFILE -c /etc/supervisord.conf
+
+       [ -f $PIDFILE ] &amp;&amp; success $&quot;$prog startup&quot; || failure $&quot;$prog startup&quot;
+       echo
+&#125;
+
+stop()
+&#123;
+       echo -n $&quot;Shutting down $prog: &quot;
+       [ -f $PIDFILE ] &amp;&amp; killproc $prog || success $&quot;$prog shutdown&quot;
+       echo
+&#125;
+
+case &quot;$1&quot; in
+
+ start)
+   start
+ ;;
+
+ stop)
+   stop
+ ;;
+
+ status)
+       status $prog
+ ;;
+
+ restart)
+   stop
+   start
+ ;;
+
+ *)
+   echo &quot;Usage: $0 &#123;start|stop|restart|status&#125;&quot;
+ ;;
+
+esac</code></pre>
+<h2 id="设置开机自启动"><a href="#设置开机自启动" class="headerlink" title="设置开机自启动"></a>设置开机自启动</h2><pre><code>sudo chmod +x /etc/rc.d/init.d/supervisord
+sudo chkconfig --add supervisord
+sudo chkconfig supervisord on
+sudo service supervisord start</code></pre>
+<p>nginx的安装配置就不列了，网上一大堆。。。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/12/20/2014-12-20-how-to-save-your-users-password/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/12/20/2014-12-20-how-to-save-your-users-password/" class="post-title-link" itemprop="url">How to save your user's password?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-12-20 23:01:55" itemprop="dateCreated datePublished" datetime="2014-12-20T23:01:55+08:00">2014-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:39:22" itemprop="dateModified" datetime="2020-08-13T16:39:22+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近要搞个简单的用户系统，看了些资料，在这里记录一下。</p>
+<p>项目基于flask框架，用户系统基于flask-login+mongoengine开发，数据存储使用mongodb。<br>以前是直接用pymongo做后台的东西，通过做这个功能发现mongoengine配合flask-wtf还是很爽的。<br>糙快猛！</p>
+<p><a target="_blank" rel="noopener" href="https://stormpath.com/blog/making-python-authentication-fast/?utm_source=Python+Weekly+Newsletter&utm_campaign=d0daa710c0-Python_Weekly_Issue_171_December_25_2014&utm_medium=email&utm_term=0_9e26887fc5-d0daa710c0-312697729">Making Python Authentication Fast</a></p>
+<p><del><a target="_blank" rel="noopener" href="https://stormpath.com/blog/password-security-right-way/">password-security-right-way</a></p>
+<p>正确加密你的密码！</p>
+<p>Level 0: No Plaintext Anywhere</p>
+<p>Level 1: Don’t Just Hash It…</p>
+<p>Level 2: Salt It!</p>
+<p>Level 3: Computational Cost</p>
+<p>作者号称大部分人只能做到这第三层 ～_～, 但是用他们的服务可以做到下面的<strong>军用级别安全性</strong>(这广告。。。) </p>
+<p>Level 4: Encryption</p>
+<p>Level 5: Distributed Data Storage</p>
+<p>文章不长但是列了很多知识点，推荐阅读</p>
+<p><del><a target="_blank" rel="noopener" href="https://stormpath.com/blog/part-one-flask-authentication-problem/">part-one-flask-authentication-problem</a></p>
+<p>flask用户验证中存在的问题</p>
+<p>关于flask用户验证系统的一个简单介绍，列举了用户验证基本的流程和问题。文章里提到了flask-login模块，<br>完整实现用户系统的库有flask-admin，flask-user，都是基于上面的库，需求简单的话直接用就行。复杂的需求就只能自己基于flask-login搞了。</p>
+<p><del><a target="_blank" rel="noopener" href="https://stormpath.com/blog/5-myths-password-security/">5-myths-password-security</a></p>
+<p>密码安全的5个神话</p>
+<ol>
+<li>MYTH: Complexity Trumps Length</li>
+</ol>
+<p><img src="http://imgs.xkcd.com/comics/password_strength.png" alt="这个漫画好搞～"></p>
+<ol start="2">
+<li><p>MYTH: Big Companies Store Passwords Securely<br>作者喷了LinkedIn，另外的文章里也爱喷LinkedIn～～～</p>
+</li>
+<li><p>MYTH: Password Checkers Ensure Strong Passwords</p>
+</li>
+<li><p>MYTH: Two-Factor Auth Means Any Password Will Do</p>
+</li>
+<li><p>MYTH: CAPTCHA Keeps Accounts Safe<br>4,5两条属于高级应用了，一般需求都用不上。。。</p>
+</li>
+</ol>
+<p><del><a target="_blank" rel="noopener" href="https://pthree.org/2011/03/07/strong-passwords-need-entropy/">password entropy</a><br>密码的熵直接影响密码强度，看这篇文章的表格。</p>
+<pre><code>Entropy (H)    Numbers    Alphabet    Alphanumeric    All ASCII characters
+32    10    6    6    5
+40    13    8    7    7
+64    20    12    11    10
+80    25    15    14    13
+96    29    17    17    15
+128    39    23    22    20
+160    49    29    27    25
+192    58    34    33    30
+224    68    40    38    35
+256    78    45    43    40
+384    116    68    65    59
+512    155    90    86    79
+1024    309    180    172    157</code></pre>
+<p><del><a target="_blank" rel="noopener" href="http://codahale.com/how-to-safely-store-a-password/">How to safely store a password</a><br>这篇文章讲了为啥加密用户密码要用bcrypt，简单翻译核心内容如下：</p>
+<p>为啥不用传统的{MD5, SHA1, SHA256, SHA512, SHA-3, etc}加密呢?<br>因为这些算法设计是用来计算数据完整性的，不是存加密密码的！<br>bcrypt用了Blowfish keying schedule算法，这个不是对称加密算法，能通过调整参数让破解复杂度跟着摩尔定律走，不怕处理变快，唯一的问题就是计算起来慢，需要使用者自己平衡安全性和性能。<br>作者举了好多例子来证明bcrypt的优势，推荐看一下    </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/12/15/2014-12-15-Modelthinking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/12/15/2014-12-15-Modelthinking/" class="post-title-link" itemprop="url">Model Thinking notes</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-12-15 23:01:55" itemprop="dateCreated datePublished" datetime="2014-12-15T23:01:55+08:00">2014-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:39:56" itemprop="dateModified" datetime="2020-08-13T16:39:56+08:00">2020-08-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>“Essentially, all models are wrongm but some are useful” —– George E.P.Box</p>
+</blockquote>
+<p>学习模型思维的摘要笔记，了解点社会学可以帮助我们进一步认识世界，认识周围的人和事。老师水平高，课程浅显易懂。</p>
+<h1 id="Unit2"><a href="#Unit2" class="headerlink" title="Unit2"></a>Unit2</h1><ul>
+<li><p>Agent based model<br>  individuals<br>  behaviors<br>  outcomes</p>
+</li>
+<li><p>谢林模型：群落的自然形成规律, sum(|b/B-y/Y|)/2</p>
+</li>
+<li><p>格兰诺维特模型:群体运动发生的概率取决于阈值低的个体数量，sum(threshold)/units<br>The Standing Ovation Model:</p>
+<blockquote>
+<p>S=Q+E<br>if S&gt;T: stand<br>subsequent rule:<br>– Stand if more x% stand</p>
+</blockquote>
+<ol>
+<li><p>Higher Quality</p>
+</li>
+<li><p>Lower Threshold</p>
+</li>
+<li><p>Larger Peer Effects</p>
+</li>
+<li><p><em>More</em> <em>Variation</em></p>
+</li>
+<li><p><em>Use</em> <em>Celebrities</em></p>
+</li>
+<li><p><em>Big</em> <em>Groups</em></p>
+<p>Will give your<strong>MORE</strong>ovation</p>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>米勒和佩吉模型</li>
+</ul>
+<h1 id="Unit5"><a href="#Unit5" class="headerlink" title="Unit5"></a>Unit5</h1><p><strong>calibration</strong><br>When we construct a model, we want to mimic the real world as accurately as possible. This process is known as calibration（校准）.</p>
+<h1 id="Unit6"><a href="#Unit6" class="headerlink" title="Unit6"></a>Unit6</h1><h3 id="Categorical-Models"><a href="#Categorical-Models" class="headerlink" title="Categorical Models"></a>Categorical Models</h3><p><strong>Correlation</strong> is not <strong>Causation</strong><br>相关性不是因果关系，这句话很精髓。即使你解释了很多方差并不代表就解决了问题，要能证明因果关系才行。相关性知识一个统计结果。</p>
+<p>R-squared<br>% variation explained</p>
+<h1 id="Unit-10-A-Simple-Markov-Model"><a href="#Unit-10-A-Simple-Markov-Model" class="headerlink" title="Unit 10 A Simple Markov Model"></a>Unit 10 A Simple Markov Model</h1><ol>
+<li>状态有限</li>
+<li>状态转移概率固定</li>
+<li>任意状态到任意状态</li>
+<li>最终能达到稳态 </li>
+</ol>
+<h1 id="Unit13-Path-Dependence"><a href="#Unit13-Path-Dependence" class="headerlink" title="Unit13 Path Dependence"></a>Unit13 Path Dependence</h1><ol>
+<li><p>定义与区别</p>
+<ul>
+<li>Outcome probabilities depend upon the sequence of past outcomes</li>
+<li>increasing return 收益递增，例子QWERTY键盘的销售</li>
+<li>Chaos, deals with init . PD deals with path</li>
+</ul>
+</li>
+<li><p>Urn Models</p>
+<ul>
+<li>Polya现实发生的事件依赖于历史发生的事件</li>
+<li>Balancing发生概率趋于相同</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/11/24/2014-11-24-API-checklist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/11/24/2014-11-24-API-checklist/" class="post-title-link" itemprop="url">API Check list</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-11-24 23:01:55" itemprop="dateCreated datePublished" datetime="2014-11-24T23:01:55+08:00">2014-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:39:22" itemprop="dateModified" datetime="2020-08-13T16:39:22+08:00">2020-08-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/api/" itemprop="url" rel="index"><span itemprop="name">api</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>转载 <a target="_blank" rel="noopener" href="http://blog.atte.ro/2014/11/05/api-development-workflow.html">api-development-workflow</a></p>
+<p>12 steps of API development</p>
+<p>I grabbed a cup of coffee and written down those particular items. Probably your own list will be a bit different, but you can use this one as a starting point.</p>
+<p>You understand requirements</p>
+<p>Requirements are written down somewhere (ticket description)</p>
+<p>You know what endpoints with which methods should be implemented</p>
+<p>You have a clear design</p>
+<p>You have written tests for the new functionality</p>
+<p>Tests pass</p>
+<p>New code is documented</p>
+<p>New code is clean and easy to understand</p>
+<p>API endpoints are documented</p>
+<p>You know who is affected and what are the changes</p>
+<p>People who are affected know about the change</p>
+<p>Code is reviewed by someone else (code review why and how)</p>
+<p>It’s quite longish but I can’t really throw anything out.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/11/23/2014-11-23-python-magicmethods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/11/23/2014-11-23-python-magicmethods/" class="post-title-link" itemprop="url">Python magicmethods</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-11-23 23:01:55" itemprop="dateCreated datePublished" datetime="2014-11-23T23:01:55+08:00">2014-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:39:22" itemprop="dateModified" datetime="2020-08-13T16:39:22+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>A good post about python magic methods, by <em>Rafe Kettler</em>, <a target="_blank" rel="noopener" href="http://www.rafekettler.com/magicmethods.html">original link</a></p>
+<hr>
+<p>##<a id="intro" href="#intro">Introduction</a></p>
+<p>This guide is the culmination of a few months’ worth of blog posts. The subject is <strong>magic methods</strong>.</p>
+<p>What are magic methods? They’re everything in object-oriented Python. They’re special methods that you can define to add “magic” to your classes. They’re always surrounded by double underscores (e.g. <code>__init__</code> or <code>__lt__</code>). They’re also not as well documented as they need to be. All of the magic methods for Python appear in the same section in the Python docs, but they’re scattered about and only loosely organized. There’s hardly an example to be found in that section (and that may very well be by design, since they’re all detailed in the <em>language reference</em>, along with boring syntax descriptions, etc.).</p>
+<p>So, to fix what I perceived as a flaw in Python’s documentation, I set out to provide some more plain-English, example-driven documentation for Python’s magic methods. I started out with weekly blog posts, and now that I’ve finished with those, I’ve put together this guide.</p>
+<p>I hope you enjoy it. Use it as a tutorial, a refresher, or a reference; it’s just intended to be a user-friendly guide to Python’s magic methods.</p>
+<p>##<a id="construction" href="#construction">Construction and Initialization</a></p>
+<p>Everyone knows the most basic magic method, <code>__init__</code>. It’s the way that we can define the initialization behavior of an object. However, when I call <code>x = SomeClass()</code>, <code>__init__</code> is not the first thing to get called. Actually, it’s a method called <code>__new__</code>, which actually creates the instance, then passes any arguments at creation on to the initializer. At the other end of the object’s lifespan, there’s <code>__del__</code>. Let’s take a closer look at these 3 magic methods:</p>
+<dl><dt><code>__new__(cls, [...)</code></dt><dd><code>__new__</code> is the first method to get called in an object’s instantiation. It takes the class, then any other arguments that it will pass along to <code>__init__</code>. <code>__new__</code> is used fairly rarely, but it does have its purposes, particularly when subclassing an immutable type like a tuple or a string. I don’t want to go in to too much detail on <code>__new__</code> because it’s not too useful, but it is covered in great detail <a target="_blank" rel="noopener" href="http://www.python.org/download/releases/2.2/descrintro/#__new__">in the Python docs</a>.</dd></dl><dl><dt><code>__init__(self, [...)</code></dt><dd>The initializer for the class. It gets passed whatever the primary constructor was called with (so, for example, if we called <code>x = SomeClass(10, &#39;foo&#39;)</code>, <code>__init__</code> would get passed <code>10</code> and <code>&#39;foo&#39;</code> as arguments. <code>__init__</code> is almost universally used in Python class definitions.</dd></dl><dl><dt><code>__del__(self)</code></dt><dd>If <code>__new__</code> and <code>__init__</code> formed the constructor of the object, <code>__del__</code> is the destructor. It doesn’t implement behavior for the statement <code>del x</code> (so that code would not translate to <code>x.__del__()</code>). Rather, it defines behavior for when an object is garbage collected. It can be quite useful for objects that might require extra cleanup upon deletion, like sockets or file objects. Be careful, however, as there is no guarantee that <code>__del__</code> will be executed if the object is still alive when the interpreter exits, so <code>__del__</code> can’t serve as a replacement for good coding practices (like always closing a connection when you’re done with it. In fact, <code>__del__</code> should almost never be used because of the precarious circumstances under which it is called; use it with caution!</dd></dl><p>Putting it all together, here’s an example of <code>__init__</code> and <code>__del__</code> in action:</p>
+<pre><code>:::python
+from os.path import join
+
+class FileObject:
+    &#39;&#39;&#39;Wrapper for file objects to make sure the file gets closed on deletion.&#39;&#39;&#39;
+
+    def __init__(self, filepath=&#39;~&#39;, filename=&#39;sample.txt&#39;):
+        # open a file filename in filepath in read and write mode
+        self.file = open(join(filepath, filename), &#39;r+&#39;)
+
+    def __del__(self):
+        self.file.close()
+        del self.file</code></pre>
+<p>##<a id="operators" href="#operators">Making Operators Work on Custom Classes</a></p>
+<p>One of the biggest advantages of using Python’s magic methods is that they provide a simple way to make objects behave like built-in types. That means you can avoid ugly, counter-intuitive, and nonstandard ways of performing basic operators. In some languages, it’s common to do something like this:</p>
+<pre><code>:::python
+if instance.equals(other_instance):
+    # do something</code></pre>
+<p>You could certainly do this in Python, too, but this adds confusion and is unnecessarily verbose. Different libraries might use different names for the same operations, making the client do way more work than necessary. With the power of magic methods, however, we can define one method (<code>__eq__</code>, in this case), and say what we <em>mean</em> instead:</p>
+<pre><code>:::python
+if instance == other_instance:
+    #do something</code></pre>
+<p>That’s part of the power of magic methods. The vast majority of them allow us to define meaning for operators so that we can use them on our own classes just like they were built in types.</p>
+<p>###<a id="comparisons" href="#comparisons">Comparison magic methods</a></p>
+<p>Python has a whole slew of magic methods designed to implement intuitive comparisons between objects using operators, not awkward method calls. They also provide a way to override the default Python behavior for comparisons of objects (by reference). Here’s the list of those methods and what they do:</p>
+<dl><dt><code>__cmp__(self, other)</code></dt><dd><code>__cmp__</code> is the most basic of the comparison magic methods. It actually implements behavior for all of the comparison operators (&lt;, ==, !=, etc.), but it might not do it the way you want (for example, if whether one instance was equal to another were determined by one criterion and and whether an instance is greater than another were determined by something else). <code>__cmp__</code> should return a negative integer if <code>self &lt; other</code>, zero if <code>self == other</code>, and positive if <code>self &gt; other</code>. It’s usually best to define each comparison you need rather than define them all at once, but <code>__cmp__</code> can be a good way to save repetition and improve clarity when you need all comparisons implemented with similar criteria.</dd></dl><dl><dt><code>__eq__(self, other)</code></dt><dd>Defines behavior for the equality operator, <code>==</code>.</dd></dl><dl><dt><code>__ne__(self, other)</code></dt><dd>Defines behavior for the inequality operator, <code>!=</code>.</dd></dl><dl><dt><code>__lt__(self, other)</code></dt><dd>Defines behavior for the less-than operator, <code>&lt;</code>.</dd></dl><dl><dt><code>__gt__(self, other)</code></dt><dd>Defines behavior for the greater-than operator, <code>&gt;</code>.</dd></dl><dl><dt><code>__le__(self, other)</code></dt><dd>Defines behavior for the less-than-or-equal-to operator, <code>&lt;=</code>.</dd></dl><dl><dt><code>__ge__(self, other)</code></dt><dd>Defines behavior for the greater-than-or-equal-to operator, <code>&gt;=</code>.</dd></dl><p>For an example, consider a class to model a word. We might want to compare words lexicographically (by the alphabet), which is the default comparison behavior for strings, but we also might want to do it based on some other criterion, like length or number of syllables. In this example, we’ll compare by length. Here’s an implementation:</p>
+<pre><code>:::python
+class Word(str):
+    &#39;&#39;&#39;Class for words, defining comparison based on word length.&#39;&#39;&#39;
+
+    def __new__(cls, word):
+        # Note that we have to use __new__. This is because str is an immutable
+        # type, so we have to initialize it early (at creation)
+        if &#39; &#39; in word:
+            print &quot;Value contains spaces. Truncating to first space.&quot;
+            word = word[:word.index(&#39; &#39;)] # Word is now all chars before first space
+        return str.__new__(cls, word)
+
+    def __gt__(self, other):
+        return len(self) &gt; len(other)
+    def __lt__(self, other):
+        return len(self) &lt; len(other)
+    def __ge__(self, other):
+        return len(self) &gt;= len(other)
+    def __le__(self, other):
+        return len(self) &lt;= len(other)</code></pre>
+<p>Now, we can create two <code>Word</code>s (by using <code>Word(&#39;foo&#39;)</code> and <code>Word(&#39;bar&#39;)</code>) and compare them based on length. Note, however, that we didn’t define <code>__eq__</code> and <code>__ne__</code>. This is because this would lead to some weird behavior (notably that <code>Word(&#39;foo&#39;) == Word(&#39;bar&#39;)</code> would evaluate to true). It wouldn’t make sense to test for equality based on length, so we fall back on <code>str</code>‘s implementation of equality.</p>
+<p>Now would be a good time to note that you don’t have to define every comparison magic method to get rich comparisons. The standard library has kindly provided us with a class decorator in the module <code>functools</code> that will define all rich comparison methods if you only define <code>__eq__</code> and one other (e.g. <code>__gt__</code>, <code>__lt__</code>, etc.) This feature is only available in Python 2.7, but when you get a chance it saves a great deal of time and effort. You can use it by placing <code>@total_ordering</code> above your class definition.</p>
+<p>###<a id="numeric" href="#numeric">Numeric magic methods</a></p>
+<p>Just like you can create ways for instances of your class to be compared with comparison operators, you can define behavior for numeric operators. Buckle your seat belts, folks…there’s a lot of these. For organization’s sake, I’ve split the numeric magic methods into 5 categories: unary operators, normal arithmetic operators, reflected arithmetic operators (more on this later), augmented assignment, and type conversions.</p>
+<p>####Unary operators and functions</p>
+<p>Unary operators and functions only have one operand, e.g. negation, absolute value, etc.</p>
+<dl><dt><code>__pos__(self)</code></dt><dd>Implements behavior for unary positive (e.g. <code>+some_object</code>)</dd></dl><dl><dt><code>__neg__(self)</code></dt><dd>Implements behavior for negation (e.g. <code>-some_object</code>)</dd></dl><dl><dt><code>__abs__(self)</code></dt><dd>Implements behavior for the built in <code>abs()</code> function.</dd></dl><dl><dt><code>__invert__(self)</code></dt><dd>Implements behavior for inversion using the <code>~</code> operator. For an explanation on what this does, see <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Bitwise_operation#NOT">the Wikipedia article on bitwise operations</a>.</dd></dl><dl><dt><code>__round__(self, n)</code></dt><dd>Implements behavior for the built in <code>round()</code> function. <code>n</code> is the number of decimal places to round to.</dd></dl><dl><dt><code>__floor__(self)</code></dt><dd>Implements behavior for <code>math.floor()</code>, i.e., rounding down to the nearest integer.</dd></dl><dl><dt><code>__ceil__(self)</code></dt><dd>Implements behavior for <code>math.ceil()</code>, i.e., rounding up to the nearest integer.</dd></dl><dl><dt><code>__trunc__(self)</code></dt><dd>Implements behavior for <code>math.trunc()</code>, i.e., truncating to an integral.</dd></dl><p>####Normal arithmetic operators</p>
+<p>Now, we cover the typical binary operators (and a function or two): +, -, * and the like. These are, for the most part, pretty self-explanatory.</p>
+<dl><dt><code>__add__(self, other)</code></dt><dd>Implements addition.</dd></dl><dl><dt><code>__sub__(self, other)</code></dt><dd>Implements subtraction.</dd></dl><dl><dt><code>__mul__(self, other)</code></dt><dd>Implements multiplication.</dd></dl><dl><dt><code>__floordiv__(self, other)</code></dt><dd>Implements integer division using the <code>//</code> operator.</dd></dl><dl><dt><code>__div__(self, other)</code></dt><dd>Implements division using the <code>/</code> operator.</dd></dl><dl><dt><code>__truediv__(self, other)</code></dt><dd>Implements <em>true</em> division. Note that this only works when <code>from __future__ import division</code> is in effect.</dd></dl><dl><dt><code>__mod__(self, other)</code></dt><dd>Implements modulo using the <code>%</code> operator.</dd></dl><dl><dt><code>__divmod__(self, other)</code></dt><dd>Implements behavior for long division using the <code>divmod()</code> built in function.</dd></dl><dl><dt><code>__pow__</code></dt><dd>Implements behavior for exponents using the <code>**</code> operator.</dd></dl><dl><dt><code>__lshift__(self, other)</code></dt><dd>Implements left bitwise shift using the <code>&lt;&lt;</code> operator.</dd></dl><dl><dt><code>__rshift__(self, other)</code></dt><dd>Implements right bitwise shift using the <code>&gt;&gt;</code> operator.</dd></dl><dl><dt><code>__and__(self, other)</code></dt><dd>Implements bitwise and using the <code>&amp;</code> operator.</dd></dl><dl><dt><code>__or__(self, other)</code></dt><dd>Implements bitwise or using the <code>|</code> operator.</dd></dl><dl><dt><code>__xor__(self, other)</code></dt><dd>Implements bitwise xor using the <code>^</code> operator.</dd></dl><p>####Reflected arithmetic operators</p>
+<p>You know how I said I would get to reflected arithmetic in a bit? Some of you might think it’s some big, scary, foreign concept. It’s actually quite simple. Here’s an example:</p>
+<pre><code>:::python
+some_object + other</code></pre>
+<p>That was “normal” addition. The reflected equivalent is the same thing, except with the operands switched around:</p>
+<pre><code>:::python
+other + some_object</code></pre>
+<p>So, all of these magic methods do the same thing as their normal equivalents, except the perform the operation with other as the first operand and self as the second, rather than the other way around. In most cases, the result of a reflected operation is the same as its normal equivalent, so you may just end up defining <code>__radd__</code> as calling <code>__add__</code> and so on. Note that the object on the left hand side of the operator (<code>other</code> in the example) must not define (or return <code>NotImplemented</code>) for its definition of the non-reflected version of an operation. For instance, in the example, <code>some_object.__radd__</code> will only be called if <code>other</code> does not define <code>__add__</code>.</p>
+<dl><dt><code>__radd__(self, other)</code></dt><dd>Implements reflected addition.</dd></dl><dl><dt><code>__rsub__(self, other)</code></dt><dd>Implements reflected subtraction.</dd></dl><dl><dt><code>__rmul__(self, other)</code></dt><dd>Implements reflected multiplication.</dd></dl><dl><dt><code>__rfloordiv__(self, other)</code></dt><dd>Implements reflected integer division using the <code>//</code> operator.</dd></dl><dl><dt><code>__rdiv__(self, other)</code></dt><dd>Implements reflected division using the <code>/</code> operator.</dd></dl><dl><dt><code>__rtruediv__(self, other)</code></dt><dd>Implements reflected <em>true</em> division. Note that this only works when <code>from __future__ import division</code> is in effect.</dd></dl><dl><dt><code>__rmod__(self, other)</code></dt><dd>Implements reflected modulo using the <code>%</code> operator.</dd></dl><dl><dt><code>__rdivmod__(self, other)</code></dt><dd>Implements behavior for long division using the <code>divmod()</code> built in function, when <code>divmod(other, self)</code> is called.</dd></dl><dl><dt><code>__rpow__</code></dt><dd>Implements behavior for reflected exponents using the <code>**</code> operator.</dd></dl><dl><dt><code>__rlshift__(self, other)</code></dt><dd>Implements reflected left bitwise shift using the <code>&lt;&lt;</code> operator.</dd></dl><dl><dt><code>__rrshift__(self, other)</code></dt><dd>Implements reflected right bitwise shift using the <code>&gt;&gt;</code> operator.</dd></dl><dl><dt><code>__rand__(self, other)</code></dt><dd>Implements reflected bitwise and using the <code>&amp;</code> operator.</dd></dl><dl><dt><code>__ror__(self, other)</code></dt><dd>Implements reflected bitwise or using the <code>|</code> operator.</dd></dl><dl><dt><code>__rxor__(self, other)</code></dt><dd>Implements reflected bitwise xor using the <code>^</code> operator.</dd></dl><p>####Augmented assignment</p>
+<p>Python also has a wide variety of magic methods to allow custom behavior to be defined for augmented assignment. You’re probably already familiar with augmented assignment, it combines “normal” operators with assignment. If you still don’t know what I’m talking about, here’s an example:</p>
+<pre><code>:::python
+x = 5
+x += 1 # in other words x = x + 1</code></pre>
+<p>Each of these methods should return the value that the variable on the left hand side should be assigned to (for instance, for <code>a += b</code>, <code>__iadd__</code> might return <code>a + b</code>, which would be assigned to <code>a</code>). Here’s the list:</p>
+<dl><dt><code>__iadd__(self, other)</code></dt><dd>Implements addition with assignment.</dd></dl><dl><dt><code>__isub__(self, other)</code></dt><dd>Implements subtraction with assignment.</dd></dl><dl><dt><code>__imul__(self, other)</code></dt><dd>Implements multiplication with assignment.</dd></dl><dl><dt><code>__ifloordiv__(self, other)</code></dt><dd>Implements integer division with assignment using the <code>//=</code> operator.</dd></dl><dl><dt><code>__idiv__(self, other)</code></dt><dd>Implements division with assignment using the <code>/=</code> operator.</dd></dl><dl><dt><code>__itruediv__(self, other)</code></dt><dd>Implements <em>true</em> division with assignment. Note that this only works when <code>from __future__ import division</code> is in effect.</dd></dl><dl><dt><code>__imod__(self, other)</code></dt><dd>Implements modulo with assignment using the <code>%=</code> operator.</dd></dl><dl><dt><code>__ipow__</code></dt><dd>Implements behavior for exponents with assignment using the <code>**=</code> operator.</dd></dl><dl><dt><code>__ilshift__(self, other)</code></dt><dd>Implements left bitwise shift with assignment using the <code>&lt;&lt;=</code> operator.</dd></dl><dl><dt><code>__irshift__(self, other)</code></dt><dd>Implements right bitwise shift with assignment using the <code>&gt;&gt;=</code> operator.</dd></dl><dl><dt><code>__iand__(self, other)</code></dt><dd>Implements bitwise and with assignment using the <code>&amp;=</code> operator.</dd></dl><dl><dt><code>__ior__(self, other)</code></dt><dd>Implements bitwise or with assignment using the <code>|=</code> operator.</dd></dl><dl><dt><code>__ixor__(self, other)</code></dt><dd>Implements bitwise xor with assignment using the <code>^=</code> operator.</dd></dl><p>####Type conversion magic methods</p>
+<p>Python also has an array of magic methods designed to implement behavior for built in type conversion functions like <code>float()</code>. Here they are:</p>
+<dl><dt><code>__int__(self)</code></dt><dd>Implements type conversion to int.</dd></dl><dl><dt><code>__long__(self)</code></dt><dd>Implements type conversion to long.</dd></dl><dl><dt><code>__float__(self)</code></dt><dd>Implements type conversion to float.</dd></dl><dl><dt><code>__complex__(self)</code></dt><dd>Implements type conversion to complex.</dd></dl><dl><dt><code>__oct__(self)</code></dt><dd>Implements type conversion to octal.</dd></dl><dl><dt><code>__hex__(self)</code></dt><dd>Implements type conversion to hexadecimal.</dd></dl><dl><dt><code>__index__(self)</code></dt><dd>Implements type conversion to an int when the object is used in a slice expression. If you define a custom numeric type that might be used in slicing, you should define <code>__index__</code>.</dd></dl><dl><dt><code>__trunc__(self)</code></dt><dd>Called when <code>math.trunc(self)</code> is called. <code>__trunc__</code> should return the value of `self truncated to an integral type (usually a long).</dd></dl><dl><dt><code>__coerce__(self, other)</code></dt><dd>Method to implement mixed mode arithmetic. <code>__coerce__</code> should return <code>None</code> if type conversion is impossible. Otherwise, it should return a pair (2-tuple) of <code>self</code> and <code>other</code>, manipulated to have the same type.</dd></dl><p>##<a id="representations" href="#representations">Representing your Classes</a>##</p>
+<p>It’s often useful to have a string representation of a class. In Python, there are a few methods that you can implement in your class definition to customize how built in functions that return representations of your class behave.</p>
+<dl><dt><code>__str__(self)</code></dt><dd>Defines behavior for when <code>str()</code> is called on an instance of your class.</dd></dl><dl><dt><code>__repr__(self)</code></dt><dd>Defines behavior for when <code>repr()</code> is called on an instance of your class. The major difference between <code>str()</code> and <code>repr()</code> is intended audience. <code>repr()</code> is intended to produce output that is mostly machine-readable (in many cases, it could be valid Python code even), whereas <code>str()</code> is intended to be human-readable.</dd></dl><dl><dt><code>__unicode__(self)</code></dt><dd>Defines behavior for when <code>unicode()</code> is called on an instance of your class. <code>unicode()</code> is like <code>str()</code>, but it returns a unicode string. Be wary: if a client calls <code>str()</code> on an instance of your class and you’ve only defined <code>__unicode__()</code>, it won’t work. You should always try to define <code>__str__()</code> as well in case someone doesn’t have the luxury of using unicode.</dd></dl><dl><dt><code>__format__(self, formatstr)</code></dt><dd>Defines behavior for when an instance of your class is used in new-style string formatting. For instance, <code>&quot;Hello, &#123;0:abc&#125;!&quot;.format(a)</code> would lead to the call <code>a.__format__(&quot;abc&quot;)</code>. This can be useful for defining your own numerical or string types that you might like to give special formatting options.</dd></dl><dl><dt><code>__hash__(self)</code></dt><dd>Defines behavior for when <code>hash()</code> is called on an instance of your class. It has to return an integer, and its result is used for quick key comparison in dictionaries. Note that this usually entails implementing <code>__eq__</code> as well. Live by the following rule: <code>a == b</code> implies <code>hash(a) == hash(b)</code>.</dd></dl><dl><dt><code>__nonzero__(self)</code></dt><dd>Defines behavior for when <code>bool()</code> is called on an instance of your class. Should return <code>True</code> or <code>False</code>, depending on whether you would want to consider the instance to be <code>True</code> or <code>False</code>.</dd></dl><dl><dt><code>__dir__(self)</code></dt><dd>Defines behavior for when <code>dir()</code> is called on an instance of your class. This method should return a list of attributes for the user. Typically, implementing <code>__dir__</code> is unnecessary, but it can be vitally important for interactive use of your classes if you redefine <code>__getattr__</code> or <code>__getattribute__</code> (which you will see in the next section) or are otherwise dynamically generating attributes.</dd></dl><dl><dt><code>__sizeof__(self)</code></dt><dd>Defines behavior for when <code>sys.getsizeof()</code> is called on an instance of your class. This should return the size of your object, in bytes. This is generally more useful for Python classes implemented in C extensions, but it helps to be aware of it.</dd></dl><p>We’re pretty much done with the boring (and example-free) part of the magic methods guide. Now that we’ve covered some of the more basic magic methods, it’s time to move to more advanced material.</p>
+<p>##<a id="access" href="#access">Controlling Attribute Access</a>##</p>
+<p>Many people coming to Python from other languages complain that it lacks true encapsulation for classes; that is, there’s no way to define private attributes with public getter and setters. This couldn’t be farther than the truth: it just happens that Python accomplishes a great deal of encapsulation through “magic”, instead of explicit modifiers for methods or fields. Take a look:</p>
+<dl><dt><code>__getattr__(self, name)</code></dt><dd>You can define behavior for when a user attempts to access an attribute that doesn’t exist (either at all or yet). This can be useful for catching and redirecting common misspellings, giving warnings about using deprecated attributes (you can still choose to compute and return that attribute, if you wish), or deftly handing an <code>AttributeError</code>. It only gets called when a nonexistent attribute is accessed, however, so it isn’t a true encapsulation solution.</dd></dl><dl><dt><code>__setattr__(self, name, value)</code></dt><dd>Unlike <code>__getattr__</code>, <code>__setattr__</code> is an encapsulation solution. It allows you to define behavior for assignment to an attribute regardless of whether or not that attribute exists, meaning you can define custom rules for any changes in the values of attributes. However, you have to be careful with how you use <code>__setattr__</code>, as the example at the end of the list will show.</dd></dl><dl><dt><code>__delattr__(self, name)</code></dt><dd>This is the exact same as <code>__setattr__</code>, but for deleting attributes instead of setting them. The same precautions need to be taken as with <code>__setattr__</code> as well in order to prevent infinite recursion (calling <code>del self.name</code> in the implementation of <code>__delattr__</code> would cause infinite recursion).</dd></dl><dl><dt><code>__getattribute__(self, name)</code></dt><dd>After all this, <code>__getattribute__</code> fits in pretty well with its companions <code>__setattr__</code> and <code>__delattr__</code>. However, I don’t recommend you use it. <code>__getattribute__</code> can only be used with new-style classes (all classes are new-style in the newest versions of Python, and in older versions you can make a class new-style by subclassing <code>object</code>. It allows you to define rules for whenever an attribute’s value is accessed. It suffers from some similar infinite recursion problems as its partners-in-crime (this time you call the base class’s <code>__getattribute__</code> method to prevent this). It also mainly obviates the need for <code>__getattr__</code>, which only gets called when <code>__getattribute__</code> is implemented if it is called explicitly or an <code>AttributeError</code> is raised. This method can be used (after all, it’s your choice), but I don’t recommend it because it has a small use case (it’s far more rare that we need special behavior to retrieve a value than to assign to it) and because it can be really difficult to implement bug-free.</dd></dl><p>You can easily cause a problem in your definitions of any of the methods controlling attribute access. Consider this example:</p>
+<pre><code>:::python
+def __setattr__(self, name, value):
+    self.name = value
+    # since every time an attribute is assigned, __setattr__() is called, this
+    # is recursion.
+    # so this really means self.__setattr__(&#39;name&#39;, value). Since the method
+    # keeps calling itself, the recursion goes on forever causing a crash
+
+def __setattr__(self, name, value):
+    self.__dict__[name] = value # assigning to the dict of names in the class
+    # define custom behavior here</code></pre>
+<p>Again, Python’s magic methods are incredibly powerful, and with great power comes great responsibility. It’s important to know the proper way to use magic methods so you don’t break any code.</p>
+<p>So, what have we learned about custom attribute access in Python? It’s not to be used lightly. In fact, it tends to be excessively powerful and counter-intuitive. But the reason why it exists is to scratch a certain itch: Python doesn’t seek to make bad things impossible, but just to make them difficult. Freedom is paramount, so you can really do whatever you want. Here’s an example of some of the special attribute access methods in action (note that we use <code>super</code> because not all classes have an attribute <code>__dict__</code>):</p>
+<pre><code>:::python
+class AccessCounter(object):
+    &#39;&#39;&#39;A class that contains a value and implements an access counter.
+    The counter increments each time the value is changed.&#39;&#39;&#39;
+
+    def __init__(self, val):
+        super(AccessCounter, self).__setattr__(&#39;counter&#39;, 0)
+        super(AccessCounter, self).__setattr__(&#39;value&#39;, val)
+
+    def __setattr__(self, name, value):
+        if name == &#39;value&#39;:
+            super(AccessCounter, self).__setattr__(&#39;counter&#39;, self.counter + 1)
+        # Make this unconditional.
+        # If you want to prevent other attributes to be set, raise AttributeError(name)
+        super(AccessCounter, self).__setattr__(name, value)
+
+    def __delattr__(self, name):
+        if name == &#39;value&#39;:
+            super(AccessCounter, self).__setattr__(&#39;counter&#39;, self.counter + 1)
+        super(AccessCounter, self).__delattr__(name)</code></pre>
+<p>##<a id="sequence" href="#sequence">Making Custom Sequences</a>##</p>
+<p>There’s a number of ways to get your Python classes to act like built in sequences (<code>dict</code>, <code>tuple</code>, <code>list</code>, <code>str</code>, etc.). These are by far my favorite magic methods in Python because of the absurd degree of control they give you and the way that they magically make a whole array of global functions work beautifully on instances of your class. But before we get down to the good stuff, a quick word on requirements.</p>
+<p>####Requirements<br>Now that we’re talking about creating your own sequences in Python, it’s time to talk about <em>protocols</em>. Protocols are somewhat similar to interfaces in other languages in that they give you a set of methods you must define. However, in Python protocols are totally informal and require no explicit declarations to implement. Rather, they’re more like guidelines.</p>
+<p>Why are we talking about protocols now? Because implementing custom container types in Python involves using some of these protocols. First, there’s the protocol for defining immutable containers: to make an immutable container, you need only define <code>__len__</code> and <code>__getitem__</code> (more on these later). The mutable container protocol requires everything that immutable containers require plus <code>__setitem__</code> and <code>__delitem__</code>. Lastly, if you want your object to be iterable, you’ll have to define <code>__iter__</code>, which returns an iterator. That iterator must conform to an iterator protocol, which requires iterators to have methods called <code>__iter__</code>(returning itself) and <code>next</code>.</p>
+<p>####The magic behind containers</p>
+<p>Without any more wait, here are the magic methods that containers use:</p>
+<dl><dt><code>__len__(self)</code></dt><dd>Returns the length of the container. Part of the protocol for both immutable and mutable containers.</dd></dl><dl><dt><code>__getitem__(self, key)</code></dt><dd>Defines behavior for when an item is accessed, using the notation <code>self[key]</code>. This is also part of both the mutable and immutable container protocols. It should also raise appropriate exceptions: <code>TypeError</code> if the type of the key is wrong and <code>KeyError</code> if there is no corresponding value for the key.</dd></dl><dl><dt><code>__setitem__(self, key, value)</code></dt><dd>Defines behavior for when an item is assigned to, using the notation <code>self[nkey] = value</code>. This is part of the mutable container protocol. Again, you should raise <code>KeyError</code> and <code>TypeError</code> where appropriate.</dd></dl><dl><dt><code>__delitem__(self, key)</code></dt><dd>Defines behavior for when an item is deleted (e.g. <code>del self[key]</code>). This is only part of the mutable container protocol. You must raise the appropriate exceptions when an invalid key is used.</dd></dl><dl><dt><code>__iter__(self)</code></dt><dd>Should return an iterator for the container. Iterators are returned in a number of contexts, most notably by the <code>iter()</code> built in function and when a container is looped over using the form <code>for x in container:</code>. Iterators are their own objects, and they also must define an <code>__iter__</code> method that returns <code>self</code>.</dd></dl><dl><dt><code>__reversed__(self)</code></dt><dd>Called to implement behavior for the <code>reversed()</code> built in function. Should return a reversed version of the sequence. Implement this only if the sequence class is ordered, like list or tuple.</dd></dl><dl><dt><code>__contains__(self, item)</code></dt><dd><code>__contains__</code> defines behavior for membership tests using <code>in</code> and <code>not in</code>. Why isn’t this part of a sequence protocol, you ask? Because when <code>__contains__</code> isn’t defined, Python just iterates over the sequence and returns <code>True</code> if it comes across the item it’s looking for.</dd></dl><dl><dt><code>__missing__(self, key)</code></dt><dd><code>__missing__</code> is used in subclasses of <code>dict</code>. It defines behavior for whenever a key is accessed that does not exist in a dictionary (so, for instance, if I had a dictionary <code>d</code> and said <code>d[&quot;george&quot;]</code> when <code>&quot;george&quot;</code> is not a key in the dict, <code>d.__missing__(&quot;george&quot;)</code> would be called).</dd></dl><p>####An example</p>
+<p>For our example, let’s look at a list that implements some functional constructs that you might be used to from other languages (Haskell, for example).</p>
+<pre><code>:::python
+class FunctionalList:
+    &#39;&#39;&#39;A class wrapping a list with some extra functional magic, like head,
+    tail, init, last, drop, and take.&#39;&#39;&#39;
+
+    def __init__(self, values=None):
+        if values is None:
+            self.values = []
+        else:
+            self.values = values
+
+    def __len__(self):
+        return len(self.values)
+
+    def __getitem__(self, key):
+        # if key is of invalid type or value, the list values will raise the error
+        return self.values[key]
+
+    def __setitem__(self, key, value):
+        self.values[key] = value
+
+    def __delitem__(self, key):
+        del self.values[key]
+
+    def __iter__(self):
+        return iter(self.values)
+
+    def __reversed__(self):
+        return reversed(self.values)
+
+    def append(self, value):
+        self.values.append(value)
+    def head(self):
+        # get the first element
+        return self.values[0]
+    def tail(self):
+        # get all elements after the first
+        return self.values[1:]
+    def init(self):
+        # get elements up to the last
+        return self.values[:-1]
+    def last(self):
+        # get last element
+        return self.values[-1]
+    def drop(self, n):
+        # get all elements except first n
+        return self.values[n:]
+    def take(self, n):
+        # get first n elements
+        return self.values[:n]</code></pre>
+<p>There you have it, a (marginally) useful example of how to implement your own sequence. Of course, there are more useful applications of custom sequences, but quite a few of them are already implemented in the standard library (batteries included, right?), like <code>Counter</code>, <code>OrderedDict</code>, and <code>NamedTuple</code>.</p>
+<p>##<a id="reflection" href="#reflection">Reflection</a></p>
+<p>You can also control how reflection using the built in functions <code>isinstance()</code> and <code>issubclass()</code>behaves by defining magic methods. The magic methods are:</p>
+<dl><dt><code>__instancecheck__(self, instance)</code></dt><dd>Checks if an instance is an instance of the class you defined (e.g. <code>isinstance(instance, class)</code>.</dd></dl><dl><dt><code>__subclasscheck__(self, subclass)</code></dt><dd>Checks if a class subclasses the class you defined (e.g. <code>issubclass(subclass, class)</code>).</dd></dl><p>The use case for these magic methods might seem small, and that may very well be true. I won’t spend too much more time on reflection magic methods because they aren’t very important, but they reflect something important about object-oriented programming in Python and Python in general: there is almost always an easy way to do something, even if it’s rarely necessary. These magic methods might not seem useful, but if you ever need them you’ll be glad that they’re there (and that you read this guide!).</p>
+<p>##<a id="callable" href="#callable">Callable Objects</a></p>
+<p>As you may already know, in Python, functions are first-class objects. This means that they can be passed to functions and methods just as if they were objects of any other kind. This is an incredibly powerful feature.</p>
+<p>A special magic method in Python allows instances of your classes to behave as if they were functions, so that you can “call” them, pass them to functions that take functions as arguments, and so on. This is another powerful convenience feature that makes programming in Python that much sweeter.</p>
+<dl><dt><code>__call__(self, [args...])</code></dt><dd>Allows an instance of a class to be called as a function. Essentially, this means that <code>x()</code> is the same as <code>x.__call__()</code>. Note that <code>__call__</code> takes a variable number of arguments; this means that you define <code>__call__</code> as you would any other function, taking however many arguments you’d like it to.</dd></dl><p><code>__call__</code> can be particularly useful in classes whose instances that need to often change state. “Calling” the instance can be an intuitive and elegant way to change the object’s state. An example might be a class representing an entity’s position on a plane:</p>
+<pre><code>:::python
+class Entity:
+    &#39;&#39;&#39;Class to represent an entity. Callable to update the entity&#39;s position.&#39;&#39;&#39;
+
+    def __init__(self, size, x, y):
+        self.x, self.y = x, y
+        self.size = size
+
+    def __call__(self, x, y):
+        &#39;&#39;&#39;Change the position of the entity.&#39;&#39;&#39;
+        self.x, self.y = x, y
+
+    # snip...</code></pre>
+<p>##<a id="context" href="#context">Context Managers</a></p>
+<p>In Python 2.5, a new keyword was introduced in Python along with a new method for code reuse: the <code>with</code> statement. The concept of context managers was hardly new in Python (it was implemented before as a part of the library), but not until <a target="_blank" rel="noopener" href="http://www.python.org/dev/peps/pep-0343/">PEP 343</a> was accepted did it achieve status as a first-class language construct. You may have seen <code>with</code> statements before:</p>
+<pre><code>:::python
+with open(&#39;foo.txt&#39;) as bar:
+    # perform some action with bar</code></pre>
+<p>Context managers allow setup and cleanup actions to be taken for objects when their creation is wrapped with a <code>with</code> statement. The behavior of the context manager is determined by two magic methods:</p>
+<dl><dt><code>__enter__(self)</code></dt><dd>Defines what the context manager should do at the beginning of the block created by the <code>with</code> statement. Note that the return value of <code>__enter__</code> is bound to the <em>target</em> of the <code>with</code> statement, or the name after the <code>as</code>.</dd></dl><dl><dt><code>__exit__(self, exception_type, exception_value, traceback)</code></dt><dd>Defines what the context manager should do after its block has been executed (or terminates). It can be used to handle exceptions, perform cleanup, or do something always done immediately after the action in the block. If the block executes successfully, <code>exception_type</code>, <code>exception_value</code>, and <code>traceback</code> will be <code>None</code>. Otherwise, you can choose to handle the exception or let the user handle it; if you want to handle it, make sure <code>__exit__</code> returns <code>True</code> after all is said and done. If you don’t want the exception to be handled by the context manager, just let it happen.</dd></dl><p><code>__enter__</code> and <code>__exit__</code> can be useful for specific classes that have well-defined and common behavior for setup and cleanup. You can also use these methods to create generic context managers that wrap other objects. Here’s an example:</p>
+<pre><code>:::python
+class Closer:
+    &#39;&#39;&#39;A context manager to automatically close an object with a close method
+    in a with statement.&#39;&#39;&#39;
+
+    def __init__(self, obj):
+        self.obj = obj
+
+    def __enter__(self):
+        return self.obj # bound to target
+
+    def __exit__(self, exception_type, exception_val, trace):
+        try:
+           self.obj.close()
+        except AttributeError: # obj isn&#39;t closable
+           print &#39;Not closable.&#39;
+           return True # exception handled successfully</code></pre>
+<p>Here’s an example of <code>Closer</code> in action, using an FTP connection to demonstrate it (a closable socket):</p>
+<pre><code>:::pythonconsole
+&gt;&gt;&gt; from magicmethods import Closer
+&gt;&gt;&gt; from ftplib import FTP
+&gt;&gt;&gt; with Closer(FTP(&#39;ftp.somesite.com&#39;)) as conn:
+...     conn.dir()
+...
+# output omitted for brevity
+&gt;&gt;&gt; conn.dir()
+# long AttributeError message, can&#39;t use a connection that&#39;s closed
+&gt;&gt;&gt; with Closer(int(5)) as i:
+...     i += 1
+...
+Not closable.
+&gt;&gt;&gt; i
+6</code></pre>
+<p>See how our wrapper gracefully handled both proper and improper uses? That’s the power of context managers and magic methods. Note that the Python standard library includes a module <a target="_blank" rel="noopener" href="http://docs.python.org/library/contextlib.html">contextlib</a> that contains a context manager, <code>contextlib.closing()</code>, that does approximately the same thing (without any handling of the case where an object does not have a <code>close()</code> method).</p>
+<p>##<a id="abcs" href="#abcs">Abstract Base Classes</a></p>
+<p>See <a target="_blank" rel="noopener" href="http://docs.python.org/2/library/abc.html">http://docs.python.org/2/library/abc.html</a>.</p>
+<p>##<a id="descriptor" href="#descriptor">Building Descriptor Objects</a></p>
+<p>Descriptors are classes which, when accessed through either getting, setting, or deleting, can also alter other objects. Descriptors aren’t meant to stand alone; rather, they’re meant to be held by an owner class. Descriptors can be useful when building object-oriented databases or classes that have attributes whose values are dependent on each other. Descriptors are particularly useful when representing attributes in several different units of measurement or representing computed attributes (like distance from the origin in a class to represent a point on a grid).</p>
+<p>To be a descriptor, a class must have at least one of <code>__get__</code>, <code>__set__</code>, and <code>__delete__</code> implemented. Let’s take a look at those magic methods:</p>
+<dl><dt><code>__get__(self, instance, owner)</code></dt><dd>Define behavior for when the descriptor’s value is retrieved. <code>instance</code> is the instance of the owner object. <code>owner</code> is the owner class itself.</dd></dl><dl><dt><code>__set__(self, instance, value)</code></dt><dd>Define behavior for when the descriptor’s value is changed. <code>instance</code> is the instance of the owner class and <code>value</code> is the value to set the descriptor to.</dd></dl><dl><dt><code>__delete__(self, instance)</code></dt><dd>Define behavior for when the descriptor’s value is deleted. <code>instance</code> is the instance of the owner object.</dd></dl><p>Now, an example of a useful application of descriptors: unit conversions.</p>
+<pre><code>:::python
+class Meter(object):
+    &#39;&#39;&#39;Descriptor for a meter.&#39;&#39;&#39;
+
+    def __init__(self, value=0.0):
+        self.value = float(value)
+    def __get__(self, instance, owner):
+        return self.value
+    def __set__(self, instance, value):
+        self.value = float(value)
+
+class Foot(object):
+    &#39;&#39;&#39;Descriptor for a foot.&#39;&#39;&#39;
+
+    def __get__(self, instance, owner):
+        return instance.meter * 3.2808
+    def __set__(self, instance, value):
+        instance.meter = float(value) / 3.2808
+
+class Distance(object):
+    &#39;&#39;&#39;Class to represent distance holding two descriptors for feet and
+    meters.&#39;&#39;&#39;
+    meter = Meter()
+    foot = Foot()</code></pre>
+<p>##<a id="copying" href="#copying">Copying</a></p>
+<p>Sometimes, particularly when dealing with mutable objects, you want to be able to copy an object and make changes without affecting what you copied from. This is where Python’s <a target="_blank" rel="noopener" href="http://docs.python.org/library/copy.html"><code>copy</code></a> comes into play. However (fortunately), Python modules are not sentient, so we don’t have to worry about a Linux-based robot uprising, but we do have to tell Python how to efficiently copy things.</p>
+<dl><dt><code>__copy__(self)</code></dt><dd>Defines behavior for <code>copy.copy()</code> for instances of your class. <code>copy.copy()</code> returns a <em>shallow copy</em> of your object – this means that, while the instance itself is a new instance, all of its data is referenced – i.e., the object itself is copied, but its data is still referenced (and hence changes to data in a shallow copy may cause changes in the original).</dd></dl><dl><dt><code>__deepcopy__(self, memodict=&#123;&#125;)</code></dt><dd>Defines behavior for <code>copy.deepcopy()</code> for instances of your class. <code>copy.deepcopy()</code> returns a <em>deep copy</em> of your object – the object <em>and</em> its data are both copied. <code>memodict</code> is a cache of previously copied objects – this optimizes copying and prevents infinite recursion when copying recursive data structures. When you want to deep copy an individual attribute, call <code>copy.deepcopy()</code> on that attribute with <code>memodict</code> as the first argument.</dd></dl><p>What are some use cases for these magic methods? As always, in any case where you need more fine-grained control than what the default behavior gives you. For instance, if you are attempting to copy an object that stores a cache as a dictionary (which might be large), it might not make sense to copy the cache as well – if the cache can be shared in memory between instances, then it should be.</p>
+<p>##<a id="pickling" href="#pickling">Pickling Your Objects</a></p>
+<p>If you spend time with other Pythonistas, chances are you’ve at least heard of pickling. Pickling is a serialization process for Python data structures, and can be incredibly useful when you need to store an object and retrieve it later (usually for caching). It’s also a major source of worries and confusion.</p>
+<p>Pickling is so important that it doesn’t just have its own module (<code>pickle</code>), but its own <em>protocol</em> and the magic methods to go with it. But first, a brief word on how to pickle existing types(feel free to skip it if you already know).</p>
+<p>###Pickling: A Quick Soak in the Brine###</p>
+<p>Let’s dive into pickling. Say you have a dictionary that you want to store and retrieve later. You couldwrite it’s contents to a file, carefully making sure that you write correct syntax, then retrieve it using either <code>exec()</code> or processing the file input. But this is precarious at best: if you store important data in plain text, it could be corrupted or changed in any number of ways to make your program crash or worse run malicious code on your computer. Instead, we’re going to pickle it:</p>
+<pre><code>:::python
+import pickle
+
+data = &#123;&#39;foo&#39;: [1, 2, 3],
+        &#39;bar&#39;: (&#39;Hello&#39;, &#39;world!&#39;),
+        &#39;baz&#39;: True&#125;
+jar = open(&#39;data.pkl&#39;, &#39;wb&#39;)
+pickle.dump(data, jar) # write the pickled data to the file jar
+jar.close()</code></pre>
+<p>Now, a few hours later, we want it back. All we have to do is unpickle it:</p>
+<pre><code>:::python
+import pickle
+
+pkl_file = open(&#39;data.pkl&#39;, &#39;rb&#39;) # connect to the pickled data
+data = pickle.load(pkl_file) # load it into a variable
+print data
+pkl_file.close()</code></pre>
+<p>What happens? Exactly what you expect. It’s just like we had <code>data</code> all along.</p>
+<p>Now, for a word of caution: pickling is not perfect. Pickle files are easily corrupted on accident and on purpose. Pickling may be more secure than using flat text files, but it still can be used to run malicious code. It’s also incompatible across different versions of Python, so don’t expect to distribute pickled objects and expect people to be able to open them. However, it can also be a powerful tool for caching and other common serialization tasks.</p>
+<p>###Pickling your own Objects###</p>
+<p>Pickling isn’t just for built-in types. It’s for any class that follows the pickle protocol. The pickle protocol has four optional methods for Python objects to customize how they act (it’s a bit different for C extensions, but that’s not in our scope):</p>
+<dl><dt><code>__getinitargs__(self)</code></dt><dd>If you’d like for <code>__init__</code> to be called when your class is unpickled, you can define <code>__getinitargs__</code>, which should return a tuple of the arguments that you’d like to be passed to  <code>__init__</code>. Note that this method will only work for old-style classes.</dd></dl><dl><dt><code>__getnewargs__(self)</code></dt><dd>For new-style classes, you can influence what arguments get passed to <code>__new__</code> upon unpickling. This method should also return a tuple of arguments that will then be passed to <code>__new__</code>.</dd></dl><dl><dt><code>__getstate__(self)</code></dt><dd>Instead of the object’s <code>__dict__</code> attribute being stored, you can return a custom state to be stored when the object is pickled. That state will be used by <code>__setstate__</code> when the object is unpickled.</dd></dl><dl><dt><code>__setstate__(self, state)</code></dt><dd>When the object is unpickled, if <code>__setstate__</code> is defined the object’s state will be passed to it instead of directly applied to the object’s <code>__dict__</code>. This goes hand in hand with <code>__getstate__</code>: when both are defined, you can represent the object’s pickled state however you want with whatever you want.</dd></dl><dl><dt><code>__reduce__(self)</code></dt><dd>When defining extension types (i.e., types implemented using Python’s C API), you have to tell Python how to pickle them if you want them to pickle them. <code>__reduce__()</code> is called when an object defining it is pickled. It can either return a string representing a global name that Python will look up and pickle, or a tuple. The tuple contains between 2 and 5 elements: a callable object that is called to recreate the object, a tuple of arguments for that callable object, state to be passed to <code>__setstate__</code> (optional), an iterator yielding list items to be pickled (optional),  and an iterator yielding dictionary items to be pickled (optional).</dd></dl><dl><dt><code>__reduce_ex__(self)</code></dt><dd><code>__reduce_ex__</code> exists for compatibility. If it is defined, <code>__reduce_ex__</code> will be called over <code>__reduce__</code> on pickling. <code>__reduce__</code> can be defined as well for older versions of the pickling API that did not support <code>__reduce_ex__</code>.</dd></dl><p>###An Example###</p>
+<p>Our example is a <code>Slate</code>, which remembers what its values have been and when those values were written to it. However, this particular slate goes blank each time it is pickled: the current value will not be saved.</p>
+<pre><code>:::python
+import time
+
+class Slate:
+    &#39;&#39;&#39;Class to store a string and a changelog, and forget its value when
+    pickled.&#39;&#39;&#39;
+
+    def __init__(self, value):
+        self.value = value
+        self.last_change = time.asctime()
+        self.history = &#123;&#125;
+
+    def change(self, new_value):
+        # Change the value. Commit last value to history
+        self.history[self.last_change] = self.value
+        self.value = new_value
+        self.last_change = time.asctime()
+
+    def print_changes(self):
+        print &#39;Changelog for Slate object:&#39;
+        for k, v in self.history.items():
+            print &#39;%s\t %s&#39; % (k, v)
+
+    def __getstate__(self):
+        # Deliberately do not return self.value or self.last_change.
+        # We want to have a &quot;blank slate&quot; when we unpickle.
+        return self.history
+
+    def __setstate__(self, state):
+        # Make self.history = state and last_change and value undefined
+        self.history = state
+        self.value, self.last_change = None, None</code></pre>
+<p>##<a id="conclusion" href="#conclusion">Conclusion</a></p>
+<p>The goal of this guide is to bring something to anyone that reads it, regardless of their experience with Python or object-oriented programming. If you’re just getting started with Python, you’ve gained valuable knowledge of the basics of writing feature-rich, elegant, and easy-to-use classes. If you’re an intermediate Python programmer, you’ve probably picked up some slick new concepts and strategies and some good ways to reduce the amount of code written by you and clients. If you’re an expert Pythonista, you’ve been refreshed on some of the stuff you might have forgotten about and maybe picked up a few new tricks along the way. Whatever your experience level, I hope that this trip through Python’s special methods has been truly magical. (I couldn’t resist the final pun!)</p>
 
       
     </div>
@@ -486,7 +1530,7 @@ printer()  #Output: Foo!</code></pre>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -552,18 +1596,18 @@ printer()  #Output: Foo!</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
