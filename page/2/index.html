@@ -155,6 +155,166 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/10/08/concurrency-is-not-parallelism/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/10/08/concurrency-is-not-parallelism/" class="post-title-link" itemprop="url">Concurrency is not Parallelism</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-10-08 22:06:53" itemprop="dateCreated datePublished" datetime="2014-10-08T22:06:53+08:00">2014-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 15:52:04" itemprop="dateModified" datetime="2020-08-13T15:52:04+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>##并发 vs. 并行</p>
+<p>并发是指同时处理很多事情。</p>
+<p>而并行是指同时能完成很多事情。</p>
+<p>两者不同，但相关。</p>
+<p>一个重点是组合，一个重点是执行。</p>
+<p>并发提供了一种方式让我们能够设计一种方案将问题(非必须的)并行的解决。</p>
+<p>地鼠的例子<a target="_blank" rel="noopener" href="http://www.vaikan.com/docs/Concurrency-is-not-Parallelism">源ppt地址</a></p>
+<p><strong>习得</strong></p>
+<p>有很多分解流程的方式。</p>
+<p>这都是并发设计。</p>
+<p>一旦完成了分解，并行可能会丧失，但很容易纠正。</p>
+<p>##并发是并行成为可能</p>
+<p>这个负载均衡的例子具有很明显的并行和可扩展性。</p>
+<p>Worker数可以非常巨大。</p>
+<p>Go语言的这种并发特征能的开发一个安全的、好用的、可扩展的、并行的软件变得很容易</p>
+<p>##并发简化了同步</p>
+<p>没有明显的需要同步的操作。</p>
+<p>程序的这种设计隐含的实现了同步。</p>
+<p>##结论</p>
+<p>并发很强大。</p>
+<p>并发不是并行。</p>
+<p>并发帮助实现并行。</p>
+<p>并发使并行(扩展等)变得容易。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/08/19/ChangeSRCforRuby/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/08/19/ChangeSRCforRuby/" class="post-title-link" itemprop="url">Change your gem source if your living in china...</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-08-19 22:06:53" itemprop="dateCreated datePublished" datetime="2014-08-19T22:06:53+08:00">2014-08-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:04:27" itemprop="dateModified" datetime="2020-08-13T16:04:27+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>感谢taobao提供这个源，FUC××××××WALL！！！ <a target="_blank" rel="noopener" href="https://ruby.taobao.org/">taobao源地址</a></p>
+<pre><code>$ gem sources --remove https://rubygems.org/
+$ gem sources -a https://ruby.taobao.org/
+$ gem sources -l
+*** CURRENT SOURCES ***
+
+https://ruby.taobao.org
+# 请确保只有 ruby.taobao.org
+$ gem install rails</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/08/14/closures-in-python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -392,7 +552,7 @@ printer()  #Output: Foo!</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -403,7 +563,7 @@ printer()  #Output: Foo!</code></pre>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
