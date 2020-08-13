@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 16:08:03" itemprop="dateModified" datetime="2020-08-13T16:08:03+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-13 16:10:48" itemprop="dateModified" datetime="2020-08-13T16:10:48+08:00">2020-08-13</time>
               </span>
 
           
@@ -200,14 +200,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>工作中需要用python写命令行工具，比较老的库有argparse/optparse，新一点的docopt/click.<br>经过试用，决定以后的cmd就都用click搞了，用argparse写的老代码有空的时候也会重写。<br>这里记录一下学习<a target="_blank" rel="noopener" href="http://click.pocoo.org/3/">click</a>的过程，以后查起来也方便。</p>
+          <p>工作中需要用python写命令行工具，比较老的库有argparse/optparse，新一点的docopt/click.<br>经过试用，决定以后的cmd就都用click搞了，用argparse写的老代码有空的时候也会重写。</p>
+<p><a target="_blank" rel="noopener" href="http://click.pocoo.org/3/">click</a></p>
 <h2 id="用click实现bash自动补全"><a href="#用click实现bash自动补全" class="headerlink" title="用click实现bash自动补全"></a>用click实现bash自动补全</h2><ul>
 <li><p>实现命令行工具的setup.py，然后安装命令行到系统中,具体步骤参考文档 <a target="_blank" rel="noopener" href="http://click.pocoo.org/3/setuptools/#setuptools-integration">http://click.pocoo.org/3/setuptools/#setuptools-integration</a></p>
 </li>
 <li><p>按照click文档中的命名规则写一行脚本放到bashrc中，具体步骤参考文档 <a target="_blank" rel="noopener" href="http://click.pocoo.org/3/bashcomplete/">http://click.pocoo.org/3/bashcomplete/</a></p>
 </li>
 </ul>
-<p>Todo 具体代码</p>
 
       
     </div>
@@ -979,6 +979,99 @@ def my_view(request):
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/09/09/2015-01-07-python-__slots__/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jie.Jia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/09/09/2015-01-07-python-__slots__/" class="post-title-link" itemprop="url">python __slots__ 用法介绍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-09-09 22:06:53" itemprop="dateCreated datePublished" datetime="2014-09-09T22:06:53+08:00">2014-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 16:10:48" itemprop="dateModified" datetime="2020-08-13T16:10:48+08:00">2020-08-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Python的__solts__方法估计很多人都不知道，个人感觉和metaclass一样属于黑魔法范畴，轻易不要用，除非你知道你在干啥，娱乐学习除外。</p>
+<p>###WTF is <strong>slots</strong></p>
+<p>当你在一个class中定义了__solts__后所有class的实例中只有slots中定义的attributes会出现在class的实例中。<br>例子：</p>
+<pre><code>class Foo:
+    __slots__ = [&#39;x&#39;]
+    def __init__(self, n):
+        self.x = n
+
+y = Foo(1)
+print y.x  # prints &quot;1&quot;
+y.x = 2
+print y.x  # prints &quot;2&quot;
+y.z = 4    # 抛出异常
+print y.z</code></pre>
+<p>###使用场景</p>
+<p>节省对象所占用的空间<br>python中的对象默认使用__dict__来存储自己的attributes，借助这个实现，你可以在任何时候动态修改对象的attributes。<br>如果使用了__slots__你可以在每个对象上节省这个dict的空间占用。因为所有对象使用的是同一个__slots__，不再维护自己的dict。<br>算一下你有几百万个对象，每个对象少占用一个dict的空间。。。</p>
+<p>实例<a target="_blank" rel="noopener" href="http://tech.oyster.com/pythons-garbage-collector/">AN ARM WRESTLE WITH PYTHON’S GARBAGE COLLECTOR</a><br>文章的作者通过用slots省了9 GB的内存。</p>
+<p>###不要滥用</p>
+<p>用了slots之后会破坏python的一些feature例如多继承就废了。</p>
+<p>###进阶推荐阅读<br><a target="_blank" rel="noopener" href="http://lucumr.pocoo.org/2014/8/16/the-python-i-would-like-to-see/">Armin Ronacher大牛拿slots开刀喷py3的文章</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jiajie999.github.io/2014/08/19/ChangeSRCforRuby/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1286,12 +1379,12 @@ printer()  #Output: Foo!</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
