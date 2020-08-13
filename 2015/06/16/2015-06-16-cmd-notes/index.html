@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>The Art of Command Line[转] | J&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Origin The Art of Command Line Basics Everyday use Processing files and data System debugging One-liners Obscure but useful More resources Disclaimer  Fluency on the command line is a skill now often">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Art of Command Line[转]">
+<meta property="og:url" content="http://jiajie999.github.io/2015/06/16/2015-06-16-cmd-notes/index.html">
+<meta property="og:site_name" content="J&#39;s blog">
+<meta property="og:description" content="Origin The Art of Command Line Basics Everyday use Processing files and data System debugging One-liners Obscure but useful More resources Disclaimer  Fluency on the command line is a skill now often">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-06-16T14:06:53.000Z">
+<meta property="article:modified_time" content="2020-08-13T07:52:04.894Z">
+<meta property="article:author" content="Jie.Jia">
+<meta property="article:tag" content="ash,cmd">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="J&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">J&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jiajie999.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2015-06-16-cmd-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/16/2015-06-16-cmd-notes/" class="article-date">
+  <time datetime="2015-06-16T14:06:53.000Z" itemprop="datePublished">2015-06-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      The Art of Command Line[转]
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://github.com/jlevy/the-art-of-command-line/blob/master/README.md">Origin</a></p>
+<h1 id="The-Art-of-Command-Line"><a href="#The-Art-of-Command-Line" class="headerlink" title="The Art of Command Line"></a>The Art of Command Line</h1><ul>
+<li><a href="#basics">Basics</a></li>
+<li><a href="#everyday-use">Everyday use</a></li>
+<li><a href="#processing-files-and-data">Processing files and data</a></li>
+<li><a href="#system-debugging">System debugging</a></li>
+<li><a href="#one-liners">One-liners</a></li>
+<li><a href="#obscure-but-useful">Obscure but useful</a></li>
+<li><a href="#more-resources">More resources</a></li>
+<li><a href="#disclaimer">Disclaimer</a></li>
+</ul>
+<p>Fluency on the command line is a skill now often neglected or considered archaic, but it improves your flexibility and productivity as an engineer in both obvious and subtle ways. This is a selection of notes and tips on using the command-line that I’ve found useful when working on Linux. Some tips are elementary, and some are fairly specific, sophisticated, or obscure. This page is not long, but if you can use and recall all the items here, you know a lot.</p>
+<p>Much of this<br><a target="_blank" rel="noopener" href="http://www.quora.com/What-are-some-lesser-known-but-useful-Unix-commands">originally</a><br><a target="_blank" rel="noopener" href="http://www.quora.com/What-are-the-most-useful-Swiss-army-knife-one-liners-on-Unix">appeared</a><br>on <a target="_blank" rel="noopener" href="http://www.quora.com/What-are-some-time-saving-tips-that-every-Linux-user-should-know">Quora</a>,<br>but given the interest there, it seems it’s worth using Github, where people more talented than I can readily suggest improvements. If you see an error or something that could be better, please submit an issue or PR!</p>
+<p>Scope:</p>
+<ul>
+<li>The goals are breadth and brevity. Every tip is essential in some situation or significantly saves time over alternatives.</li>
+<li>This is written for Linux. Many but not all items apply equally to MacOS (or even Cygwin).</li>
+<li>The focus is on interactive Bash, though many tips apply to other shells and to general Bash scripting.</li>
+<li>Descriptions are intentionally minimal, with the expectation you’ll use <code>man</code>, <code>apt-get</code>/<code>yum</code> to install, and Google for more background.</li>
+</ul>
+<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><ul>
+<li><p>Learn basic Bash. Actually, type <code>man bash</code> and at least skim the whole thing; it’s pretty easy to follow and not that long. Alternate shells can be nice, but bash is powerful and always available (learning <em>only</em> zsh, fish, etc., while tempting on your own laptop, restricts you in many situations, such as using existing servers).</p>
+</li>
+<li><p>Learn Vim (<code>vi</code>). There’s really no competition for random Linux editing (even if you use Emacs, a big IDE, or a modern hipster editor most of the time).</p>
+</li>
+<li><p>Know ssh, and the basics of passwordless authentication, via <code>ssh-agent</code>, <code>ssh-add</code>, etc.</p>
+</li>
+<li><p>Be familiar with bash job management: <code>&amp;</code>, <strong>ctrl-z</strong>, <strong>ctrl-c</strong>, <code>jobs</code>, <code>fg</code>, <code>bg</code>, <code>kill</code>, etc.</p>
+</li>
+<li><p>Basic file management: <code>ls</code> and <code>ls -l</code> (in particular, learn what every column in <code>ls -l</code> means), <code>less</code>, <code>head</code>, <code>tail</code> and <code>tail -f</code>, <code>ln</code> and <code>ln -s</code> (learn the differences and advantages of hard versus soft links), <code>chown</code>, <code>chmod</code>, <code>du</code> (for a quick summary of disk usage: <code>du -sk *</code>), <code>df</code>, <code>mount</code>.</p>
+</li>
+<li><p>Basic network management: <code>ip</code> or <code>ifconfig</code>, <code>dig</code>.</p>
+</li>
+<li><p>Know regular expressions well, and the various flags to <code>grep</code>/<code>egrep</code>. The <code>-i</code>, <code>-o</code>, <code>-A</code>, and <code>-B</code> options are worth knowing.</p>
+</li>
+<li><p>Learn to use <code>apt-get</code> or <code>yum</code> (depending on distro) to find and install packages. And make sure you have <code>pip</code> to install Python-based command-line tools (a few below are easiest to install via <code>pip</code>).</p>
+</li>
+</ul>
+<h2 id="Everyday-use"><a href="#Everyday-use" class="headerlink" title="Everyday use"></a>Everyday use</h2><ul>
+<li><p>In bash, use <strong>ctrl-r</strong> to search through command history.</p>
+</li>
+<li><p>In bash, use <strong>ctrl-w</strong> to delete the last word, and <strong>ctrl-u</strong> to delete the whole line. Use <strong>alt-Left</strong> and <strong>alt-Right</strong> to move by word, and <strong>ctrl-k</strong> to kill to the end of the line. See <code>man readline</code> for all the default keybindings in bash. There are a lot. For example <strong>alt-.</strong> cycles through previous arguments, and *<em>alt-**</em> expands a glob.</p>
+</li>
+<li><p>To go back to the previous working directory: <code>cd -</code></p>
+</li>
+<li><p>If you are halfway through typing a command but change your mind, hit <strong>alt-#</strong> to add a <code>#</code> at the beginning and enter it as a comment (or use <strong>ctrl-a</strong>, <strong>#</strong>, <strong>enter</strong>). You can then return to it later via command history.</p>
+</li>
+<li><p>Use <code>xargs</code> (or <code>parallel</code>). It’s very powerful. Note you can control how many items execute per line (<code>-L</code>) as well as parallelism (<code>-P</code>). If you’re not sure if it’ll do the right thing, use <code>xargs echo</code> first. Also, <code>-I&#123;&#125;</code> is handy. Examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -name \*.py | xargs grep some_function</span><br><span class="line">cat hosts | xargs -I&#123;&#125; ssh root@&#123;&#125; hostname</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>pstree -p</code> is a helpful display of the process tree.</p>
+</li>
+<li><p>Use <code>pgrep</code> and <code>pkill</code> to find or signal processes by name (<code>-f</code> is helpful).</p>
+</li>
+<li><p>Know the various signals you can send processes. For example, to suspend a process, use <code>kill -STOP [pid]</code>. For the full list, see <code>man 7 signal</code></p>
+</li>
+<li><p>Use <code>nohup</code> or <code>disown</code> if you want a background process to keep running forever.</p>
+</li>
+<li><p>Check what processes are listening via <code>netstat -lntp</code>.</p>
+</li>
+<li><p>See also <code>lsof</code> for open sockets and files.</p>
+</li>
+<li><p>In bash scripts, use <code>set -x</code> for debugging output. Use strict modes whenever possible. Use <code>set -e</code> to abort on errors. Use <code>set -o pipefail</code> as well, to be strict about errors (though this topic is a bit subtle). For more involved scripts, also use <code>trap</code>.</p>
+</li>
+<li><p>In bash scripts, subshells (written with parentheses) are convenient ways to group commands. A common example is to temporarily move to a different working directory, e.g.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># do something in current dir</span><br><span class="line">(cd &#x2F;some&#x2F;other&#x2F;dir; other-command)</span><br><span class="line"># continue in original dir</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>In bash, note there are lots of kinds of variable expansion. Checking a variable exists: <code>$&#123;name:?error message&#125;</code>. For example, if a bash script requires a single argument, just write <code>input_file=$&#123;1:?usage: $0 input_file&#125;</code>. Arithmetic expansion: <code>i=$(( (i + 1) % 5 ))</code>. Sequences: <code>&#123;1..10&#125;</code>. Trimming of strings: <code>$&#123;var%suffix&#125;</code> and <code>$&#123;var#prefix&#125;</code>. For example if <code>var=foo.pdf</code>, then <code>echo $&#123;var%.pdf&#125;.txt</code> prints <code>foo.txt</code>.</p>
+</li>
+<li><p>The output of a command can be treated like a file via <code>&lt;(some command)</code>. For example, compare local <code>/etc/hosts</code> with a remote one:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff &#x2F;etc&#x2F;hosts &lt;(ssh somehost cat &#x2F;etc&#x2F;hosts)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Know about “here documents” in bash, as in <code>cat &lt;&lt;EOF ...</code>.</p>
+</li>
+<li><p>In Bash, redirect both standard output and standard error via: <code>some-command &gt;logfile 2&gt;&amp;1</code>. Often, to ensure a command does not leave an open file handle to standard input, tying it to the terminal you are in, it is also good practice to add <code>&lt;/dev/null</code>.</p>
+</li>
+<li><p>Use <code>man ascii</code> for a good ASCII table, with hex and decimal values.</p>
+</li>
+<li><p>Use <code>screen</code> or <code>tmux</code> to multiplex the screen, especially useful on remote ssh sessions and to detach and re-attach to a session. A more minimal alternative for session persistence only is <code>dtach</code>.</p>
+</li>
+<li><p>In ssh, knowing how to port tunnel with <code>-L</code> or <code>-D</code> (and occasionally <code>-R</code>) is useful, e.g. to access web sites from a remote server.</p>
+</li>
+<li><p>It can be useful to make a few optimizations to your ssh configuration; for example, this <code>~/.ssh/config</code> contains settings to avoid dropped connections in certain network environments, and use compression (which is helpful with scp over low-bandwidth connections):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TCPKeepAlive&#x3D;yes</span><br><span class="line">ServerAliveInterval&#x3D;15</span><br><span class="line">ServerAliveCountMax&#x3D;6</span><br><span class="line">Compression&#x3D;yes</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A few other options relevant to ssh are security sensitive and should be enabled with care, e.g. per subnet or host or in trusted networks: <code>StrictHostKeyChecking=no</code>, <code>ForwardAgent=yes</code></p>
+</li>
+<li><p>To get the permissions on a file in octal form, which is useful for system configuration but not available in <code>ls</code> and easy to bungle, use something like</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stat -c &#39;%A %a %n&#39; &#x2F;etc&#x2F;timezone</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>For interactive selection of values from the output of another command, use <a target="_blank" rel="noopener" href="https://github.com/mooz/percol"><code>percol</code></a>.</p>
+</li>
+<li><p>For interaction with files based on the output of another command (like <code>git</code>), use <code>fpp</code> (<a target="_blank" rel="noopener" href="https://github.com/facebook/PathPicker">PathPicker</a>).</p>
+</li>
+</ul>
+<h2 id="Processing-files-and-data"><a href="#Processing-files-and-data" class="headerlink" title="Processing files and data"></a>Processing files and data</h2><ul>
+<li><p>To locate a file by name in the current directory, <code>find -iname *something* .</code> (or similar). To find a file anywhere by name, use <code>locate something</code> (but bear in mind <code>updatedb</code> my not have indexed recently created files).</p>
+</li>
+<li><p>For general searching through source or data files (more advanced than <code>grep -r</code>), use <a target="_blank" rel="noopener" href="https://github.com/ggreer/the_silver_searcher"><code>ag</code></a>.</p>
+</li>
+<li><p>To convert HTML to text: <code>lynx -dump -stdin</code></p>
+</li>
+<li><p>For Markdown, HTML, and all kinds of document conversion, try <a target="_blank" rel="noopener" href="http://pandoc.org/"><code>pandoc</code></a>.</p>
+</li>
+<li><p>If you must handle XML, <code>xmlstarlet</code> is old but good.</p>
+</li>
+<li><p>For JSON, use <code>jq</code>.</p>
+</li>
+<li><p>For Amazon S3, <a target="_blank" rel="noopener" href="https://github.com/s3tools/s3cmd"><code>s3cmd</code></a> is convenient and <a target="_blank" rel="noopener" href="https://github.com/bloomreach/s4cmd"><code>s4cmd</code></a> is faster. Amazon’s <a target="_blank" rel="noopener" href="https://github.com/aws/aws-cli"><code>aws</code></a> is essential for other AWS-related tasks.</p>
+</li>
+<li><p>Know about <code>sort</code> and <code>uniq</code>, including uniq’s <code>-u</code> and <code>-d</code> options – see one-liners below.</p>
+</li>
+<li><p>Know about <code>cut</code>, <code>paste</code>, and <code>join</code> to manipulate text files. Many people use <code>cut</code> but forget about <code>join</code>.</p>
+</li>
+<li><p>Know that locale affects a lot of command line tools in subtle ways, including sorting order (collation) and performance. Most Linux installations will set <code>LANG</code> or other locale variables to a local setting like US English. But be aware sorting will change if you change locale. And know i18n routines can make sort or other commands run <em>many times</em> slower. In some situations (such as the set operations or uniqueness operations below) you can safely ignore slow i18n routines entirely and use traditional byte-based sort order, using <code>export LC_ALL=C</code>.</p>
+</li>
+<li><p>Know basic <code>awk</code> and <code>sed</code> for simple data munging. For example, summing all numbers in the third column of a text file: <code>awk &#39;&#123; x += $3 &#125; END &#123; print x &#125;&#39;</code>. This is probably 3X faster and 3X shorter than equivalent Python.</p>
+</li>
+<li><p>To replace all occurrences of a string in place, in one or more files:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -pi.bak -e &#39;s&#x2F;old-string&#x2F;new-string&#x2F;g&#39; my-files-*.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>To rename many files at once according to a pattern, use <code>rename</code>. For complex renames, <a target="_blank" rel="noopener" href="https://github.com/jlevy/repren"><code>repren</code></a> may help.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Recover backup files foo.bak -&gt; foo:</span><br><span class="line">rename &#39;s&#x2F;\.bak$&#x2F;&#x2F;&#39; *.bak</span><br><span class="line"># Full rename of filenames, directories, and contents foo -&gt; bar:</span><br><span class="line">repren --full --preserve-case --from foo --to bar .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use <code>shuf</code> to shuffle or select random lines from a file.</p>
+</li>
+<li><p>Know <code>sort</code>‘s options. Know how keys work (<code>-t</code> and <code>-k</code>). In particular, watch out that you need to write <code>-k1,1</code> to sort by only the first field; <code>-k1</code> means sort according to the whole line.</p>
+</li>
+<li><p>Stable sort (<code>sort -s</code>) can be useful. For example, to sort first by field 2, then secondarily by field 1, you can use <code>sort -k1,1 | sort -s -k2,2</code></p>
+</li>
+<li><p>If you ever need to write a tab literal in a command line in bash (e.g. for the -t argument to sort), press <strong>ctrl-v</strong> <strong>[Tab]</strong> or write <code>$&#39;\t&#39;</code> (the latter is better as you can copy/paste it).</p>
+</li>
+<li><p>For binary files, use <code>hd</code> for simple hex dumps and <code>bvi</code> for binary editing.</p>
+</li>
+<li><p>Also for binary files, <code>strings</code> (plus <code>grep</code>, etc.) lets you find bits of text.</p>
+</li>
+<li><p>To convert text encodings, try <code>iconv</code>. Or <code>uconv</code> for more advanced use; it supports some advanced Unicode things. For example, this command lowercases and removes all accents (by expanding and dropping them):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uconv -f utf-8 -t utf-8 -x &#39;::Any-Lower; ::Any-NFD; [:Nonspacing Mark:] &gt;; ::Any-NFC; &#39; &lt; input.txt &gt; output.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>To split files into pieces, see <code>split</code> (to split by size) and <code>csplit</code> (to split by a pattern).</p>
+</li>
+</ul>
+<h2 id="System-debugging"><a href="#System-debugging" class="headerlink" title="System debugging"></a>System debugging</h2><ul>
+<li><p>For web debugging, <code>curl</code> and <code>curl -I</code> are handy, or their <code>wget</code> equivalents, or the more modern <a target="_blank" rel="noopener" href="https://github.com/jakubroztocil/httpie"><code>httpie</code></a>.</p>
+</li>
+<li><p>To know disk/cpu/network status, use <code>iostat</code>, <code>netstat</code>, <code>top</code> (or the better <code>htop</code>), and (especially) <code>dstat</code>. Good for getting a quick idea of what’s happening on a system.</p>
+</li>
+<li><p>For a more in-depth system overview, use <a target="_blank" rel="noopener" href="https://github.com/nicolargo/glances"><code>glances</code></a>. It presents you with several system level statistics in one terminal window. Very helpful for quickly checking on various subsystems.</p>
+</li>
+<li><p>To know memory status, run and understand the output of <code>free</code> and <code>vmstat</code>. In particular, be aware the “cached” value is memory held by the Linux kernel as file cache, so effectively counts toward the “free” value.</p>
+</li>
+<li><p>Java system debugging is a different kettle of fish, but a simple trick on Oracle’s and some other JVMs is that you can run <code>kill -3 &lt;pid&gt;</code> and a full stack trace and heap summary (including generational garbage collection details, which can be highly informative) will be dumped to stderr/logs.</p>
+</li>
+<li><p>Use <code>mtr</code> as a better traceroute, to identify network issues.</p>
+</li>
+<li><p>For looking at why a disk is full, <code>ncdu</code> saves time over the usual commands like <code>du -sh *</code>.</p>
+</li>
+<li><p>To find which socket or process is using bandwidth, try <code>iftop</code> or <code>nethogs</code>.</p>
+</li>
+<li><p>The <code>ab</code> tool (comes with Apache) is helpful for quick-and-dirty checking of web server performance. For more complex load testing, try <code>siege</code>.</p>
+</li>
+<li><p>For more serious network debugging, <code>wireshark</code> or <code>tshark</code>.</p>
+</li>
+<li><p>Know about <code>strace</code> and <code>ltrace</code>. These can be helpful if a program is failing, hanging, or crashing, and you don’t know why, or if you want to get a general idea of performance. Note the profiling option (<code>-c</code>), and the ability to attach to a running process (<code>-p</code>).</p>
+</li>
+<li><p>Know about <code>ldd</code> to check shared libraries etc.</p>
+</li>
+<li><p>Know how to connect to a running process with <code>gdb</code> and get its stack traces.</p>
+</li>
+<li><p>Use <code>/proc</code>. It’s amazingly helpful sometimes when debugging live problems. Examples: <code>/proc/cpuinfo</code>, <code>/proc/xxx/cwd</code>, <code>/proc/xxx/exe</code>, <code>/proc/xxx/fd/</code>, <code>/proc/xxx/smaps</code>.</p>
+</li>
+<li><p>When debugging why something went wrong in the past, <code>sar</code> can be very helpful. It shows historic statistics on CPU, memory, network, etc.</p>
+</li>
+<li><p>For deeper systems and performance analyses, look at <code>stap</code> (<a target="_blank" rel="noopener" href="https://sourceware.org/systemtap/wiki">SystemTap</a>), <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Perf_(Linux)"><code>perf</code></a>, and <a target="_blank" rel="noopener" href="https://github.com/draios/sysdig"><code>sysdig</code></a>.</p>
+</li>
+<li><p>Confirm what Linux distribution you’re using (works on most distros): <code>lsb_release -a</code></p>
+</li>
+<li><p>Use <code>dmesg</code> whenever something’s acting really funny (it could be hardware or driver issues).</p>
+</li>
+</ul>
+<h2 id="One-liners"><a href="#One-liners" class="headerlink" title="One-liners"></a>One-liners</h2><p>A few examples of piecing together commands:</p>
+<ul>
+<li><p>It is remarkably helpful sometimes that you can do set intersection, union, and difference of text files via <code>sort</code>/<code>uniq</code>. Suppose <code>a</code> and <code>b</code> are text files that are already uniqued. This is fast, and works on files of arbitrary size, up to many gigabytes. (Sort is not limited by memory, though you may need to use the <code>-T</code> option if <code>/tmp</code> is on a small root partition.) See also the note about <code>LC_ALL</code> above.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat a b | sort | uniq &gt; c   # c is a union b</span><br><span class="line">cat a b | sort | uniq -d &gt; c   # c is a intersect b</span><br><span class="line">cat a b b | sort | uniq -u &gt; c   # c is set difference a - b</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Summing all numbers in the third column of a text file (this is probably 3X faster and 3X less code than equivalent Python):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;&#123; x +&#x3D; $3 &#125; END &#123; print x &#125;&#39; myfile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>If want to see sizes/dates on a tree of files, this is like a recursive <code>ls -l</code> but is easier to read than <code>ls -lR</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -ls</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use <code>xargs</code> or <code>parallel</code> whenever you can. Note you can control how many items execute per line (<code>-L</code>) as well as parallelism (<code>-P</code>). If you’re not sure if it’ll do the right thing, use xargs echo first. Also, <code>-I&#123;&#125;</code> is handy. Examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -name \*.py | xargs grep some_function</span><br><span class="line">cat hosts | xargs -I&#123;&#125; ssh root@&#123;&#125; hostname</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Say you have a text file, like a web server log, and a certain value that appears on some lines, such as an <code>acct_id</code> parameter that is present in the URL. If you want a tally of how many requests for each <code>acct_id</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat access.log | egrep -o &#39;acct_id&#x3D;[0-9]+&#39; | cut -d&#x3D; -f2 | sort | uniq -c | sort -rn</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Run this function to get a random tip from this document (parses Markdown and extracts an item):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function taocl() &#123;</span><br><span class="line">  curl -s https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;jlevy&#x2F;the-art-of-command-line&#x2F;master&#x2F;README.md |</span><br><span class="line">    pandoc -f markdown -t html |</span><br><span class="line">    xmlstarlet fo --html --dropdtd |</span><br><span class="line">    xmlstarlet sel -t -v &quot;(html&#x2F;body&#x2F;ul&#x2F;li[count(p)&gt;0])[$RANDOM mod last()+1]&quot; |</span><br><span class="line">    xmlstarlet unesc | fmt 80</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="Obscure-but-useful"><a href="#Obscure-but-useful" class="headerlink" title="Obscure but useful"></a>Obscure but useful</h2><ul>
+<li><p><code>expr</code>: perform arithmetic or boolean operations or evaluate regular expressions</p>
+</li>
+<li><p><code>m4</code>: simple macro processor</p>
+</li>
+<li><p><code>screen</code>: powerful terminal multiplexing and session persistence</p>
+</li>
+<li><p><code>yes</code>: print a string a lot</p>
+</li>
+<li><p><code>cal</code>: nice calendar</p>
+</li>
+<li><p><code>env</code>: run a command (useful in scripts)</p>
+</li>
+<li><p><code>look</code>: find English words (or lines in a file) beginning with a string</p>
+</li>
+<li><p><code>cut </code>and paste and join: data manipulation</p>
+</li>
+<li><p><code>fmt</code>: format text paragraphs</p>
+</li>
+<li><p><code>pr</code>: format text into pages/columns</p>
+</li>
+<li><p><code>fold</code>: wrap lines of text</p>
+</li>
+<li><p><code>column</code>: format text into columns or tables</p>
+</li>
+<li><p><code>expand </code>and unexpand: convert between tabs and spaces</p>
+</li>
+<li><p><code>nl</code>: add line numbers</p>
+</li>
+<li><p><code>seq</code>: print numbers</p>
+</li>
+<li><p><code>bc</code>: calculator</p>
+</li>
+<li><p><code>factor</code>: factor integers</p>
+</li>
+<li><p><code>nc</code>: network debugging and data transfer</p>
+</li>
+<li><p><code>dd</code>: moving data between files or devices</p>
+</li>
+<li><p><code>file</code>: identify type of a file</p>
+</li>
+<li><p><code>stat</code>: file info</p>
+</li>
+<li><p><code>tac</code>: print files in reverse</p>
+</li>
+<li><p><code>shuf</code>: random selection of lines from a file</p>
+</li>
+<li><p><code>comm</code>: compare sorted files line by line</p>
+</li>
+<li><p><code>hd</code> and <code>bvi</code>: dump or edit binary files</p>
+</li>
+<li><p><code>strings</code>: extract text from binary files</p>
+</li>
+<li><p><code>tr</code>: character translation or manipulation</p>
+</li>
+<li><p><code>iconv </code>or uconv: conversion for text encodings</p>
+</li>
+<li><p><code>split </code>and csplit: splitting files</p>
+</li>
+<li><p><code>7z</code>: high-ratio file compression</p>
+</li>
+<li><p><code>ldd</code>: dynamic library info</p>
+</li>
+<li><p><code>nm</code>: symbols from object files</p>
+</li>
+<li><p><code>ab</code>: benchmarking web servers</p>
+</li>
+<li><p><code>strace</code>: system call debugging</p>
+</li>
+<li><p><code>mtr</code>: better traceroute for network debugging</p>
+</li>
+<li><p><code>cssh</code>: visual concurrent shell</p>
+</li>
+<li><p><code>wireshark</code> and <code>tshark</code>: packet capture and network debugging</p>
+</li>
+<li><p><code>host</code> and <code>dig</code>: DNS lookups</p>
+</li>
+<li><p><code>lsof</code>: process file descriptor and socket info</p>
+</li>
+<li><p><code>dstat</code>: useful system stats</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/nicolargo/glances"><code>glances</code></a> : high level, multi-subsystem overview</p>
+</li>
+<li><p><code>iostat</code>: CPU and disk usage stats</p>
+</li>
+<li><p><code>htop</code>: improved version of top</p>
+</li>
+<li><p><code>last</code>: login history</p>
+</li>
+<li><p><code>w</code>: who’s logged on</p>
+</li>
+<li><p><code>id</code>: user/group identity info</p>
+</li>
+<li><p><code>sar</code>: historic system stats</p>
+</li>
+<li><p><code>iftop</code> or <code>nethogs</code>: network utilization by socket or process</p>
+</li>
+<li><p><code>ss</code>: socket statistics</p>
+</li>
+<li><p><code>dmesg</code>: boot and system error messages</p>
+</li>
+<li><p><code>hdparm</code>: SATA/ATA disk manipulation/performance</p>
+</li>
+<li><p><code>lsb_release</code>: Linux distribution info</p>
+</li>
+<li><p><code>lshw</code>: hardware information</p>
+</li>
+<li><p><code>gpg</code>: encrypt and sign files</p>
+</li>
+<li><p><code>fortune</code>, <code>ddate</code>, and <code>sl</code>: um, well, it depends on whether you consider steam locomotives and Zippy quotations “useful”</p>
+</li>
+</ul>
+<h2 id="More-resources"><a href="#More-resources" class="headerlink" title="More resources"></a>More resources</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/alebcay/awesome-shell">awesome-shell</a>: A curated list of shell tools and resources.</li>
+<li><a target="_blank" rel="noopener" href="http://redsymbol.net/articles/unofficial-bash-strict-mode/">Strict mode</a> for writing better shell scripts.</li>
+</ul>
+<h2 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h2><p>With the exception of very small tasks, code is written so others can read it. The fact you <em>can</em> do something in Bash doesn’t necessarily mean you should! ;)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jiajie999.github.io/2015/06/16/2015-06-16-cmd-notes/" data-id="ckdsi8gk5000oll9kanh98jki" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ash-cmd/" rel="tag">ash,cmd</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/08/13/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/19/2015-03-19-underscores-in-python/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">underscores in python</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/mongo/">mongo</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ash-cmd/" rel="tag">ash,cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/closures-python/" rel="tag">closures,python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrency/" rel="tag">concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/" rel="tag">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-underscores/" rel="tag">python,underscores</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ash-cmd/" style="font-size: 10px;">ash,cmd</a> <a href="/tags/closures-python/" style="font-size: 20px;">closures,python</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/flask/" style="font-size: 10px;">flask</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/nosql/" style="font-size: 10px;">nosql</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-underscores/" style="font-size: 10px;">python,underscores</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/13/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/16/2015-06-16-cmd-notes/">The Art of Command Line[转]</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/19/2015-03-19-underscores-in-python/">underscores in python</a>
+          </li>
+        
+          <li>
+            <a href="/2015/02/07/2015-02-07-flask-notes/">Flask notes</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/08/concurrency-is-not-parallelism/">Concurrency is not Parallelism</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Jie.Jia<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
